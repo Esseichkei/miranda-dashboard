@@ -1,0 +1,12 @@
+/
+/bookings
+/bookings/:id
+/bookings/:id/edit
+/rooms
+/rooms/:id
+/rooms/:id/edit
+/users
+/users/:id
+/users/:id/edit
+/contact
+/contact/:id
