@@ -1,4 +1,5 @@
 /
+/login
 /bookings
 /bookings/:id
 /bookings/:id/edit
