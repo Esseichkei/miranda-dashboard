@@ -21,11 +21,13 @@ export function Login(props) {
         return (
             <div>
                 <h1>Login!</h1>
-                <label htmlFor='user'>User</label>
-                <input type='text' name='user' value={user} onChange={changeUser}></input>
-                <label htmlFor='password'>Password</label>
-                <input type='password' name='password' value={password} onChange={changePass}></input>
-                <button onClick={tryLoggingIn}>Log in!</button>
+                <form>
+                    <label htmlFor='user'>User</label>
+                    <input type='text' name='user' value={user} onChange={changeUser} autoComplete='username'></input>
+                    <label htmlFor='password'>Password</label>
+                    <input type='password' name='password' value={password} onChange={changePass} autoComplete='current-password'></input>
+                    <button onClick={tryLoggingIn}>Log in!</button>
+                </form>
             </div>
         );
     }
