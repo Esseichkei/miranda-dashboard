@@ -7,7 +7,8 @@ export const MainDiv = styled.div`
     min-height: 100vh;
     background-color: #F8F8F8;
     padding-top: 140px;
-    padding-left: ${props => props.sidebarShow ? "365px" : "20px"};
+    transition: padding-left 0.3s ease-out;
+    padding-left: ${props => props.sidebarShow === true ? "365px" : "20px"};
     padding-right: 20px;
     padding-bottom: 20px;
 `;
@@ -18,14 +19,19 @@ export const HeaderDiv = styled.div`
     width: 100%;
     height: 120px;
     background-color: #556655;
-    padding-left: ${props => props.sidebarShow ? "365px" : "20px"};
+    transition: padding-left 0.3s ease-out;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: ${props => props.sidebarShow === true ? "365px" : "20px"};
 `;
 export const SidebarDiv = styled.div`
     position: fixed;
     height: 100vh;
     top: 0;
-    transition: left 0.5s;
-    left: ${props => props.show ? "0" : "-345px"};
+    transition: left 0.3s ease-out;
+    padding: 20px;
+    left: ${props => props.sidebarShow === true ? "0" : "-345px"};
     width: 345px;
     background-color: #665555;
 `;
