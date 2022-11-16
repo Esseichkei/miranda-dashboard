@@ -7,6 +7,7 @@ export function Login(props) {
     const auth = useContext(AuthContext);
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [failed, setFailed] = useState(false);
     const changeUser = (ev) => {
         setUser(ev.target.value);
     };
@@ -15,7 +16,11 @@ export function Login(props) {
     }
     const tryLoggingIn = (ev) => {
         ev.preventDefault();
-        auth.logIn(user, password)
+        if (!auth.logIn(user, password)) {
+            setUser('');
+            setPassword('');
+            setFailed(true);
+        }
     }
     if (auth.isLoggedIn()) {
         return <Navigate to='/'/>;
@@ -33,7 +38,7 @@ export function Login(props) {
                             <label htmlFor='password'>Password</label>
                             <LoginInputField type='password' name='password' value={password} onChange={changePass} autoComplete='current-password'></LoginInputField>
                         </LoginInputDiv>
-                        <LoginButton type="submit" value="Log in"/>
+                        <LoginButton type="submit" value="Log in" failed={failed}/>
                     </LoginForm>
                 </LoginContainer>
             </LoginFullScreen>

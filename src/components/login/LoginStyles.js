@@ -44,11 +44,11 @@ export const LoginButton = styled.input`
     border-radius: 8px;
     text-align: center;
     padding: 14px 0;
-    background-color: #DDDDDD;
+    background-color: ${props => props.failed ? "#EEDDDD": "#DDDDDD"};
     margin: 20px;
     width: 150px;
     font-size: 18px;
     &:hover {
-        background-color: #BBBBBB;
+        background-color: ${props => props.failed ? "#CCAAAA": "#BBBBBB"};
     }
 `;

@@ -3,8 +3,8 @@ import { Dashboard } from "./components/dashboard/main";
 import { Login } from "./components/login/Login";
 import { Bookings } from "./components/bookings/main";
 import { BookingsSingle } from "./components/bookings/single";
-import { Rooms } from "./components/rooms/main";
-import { RoomsSingle } from "./components/rooms/single";
+import { Rooms } from "./components/rooms/Rooms";
+import { SingleRoom } from "./components/rooms/SingleRoom";
 import { Users } from "./components/users/main";
 import { UsersSingle } from "./components/users/single";
 import { Contact } from "./components/contact/main";
@@ -45,7 +45,7 @@ function App() {
           <Route path="/bookings" element={<Bookings/>} />
           <Route path="/bookings/:id" element={<BookingsSingle/>} />
           <Route path="/rooms" element={<Rooms/>} />
-          <Route path="/rooms/:id" element={<RoomsSingle/>} />
+          <Route path="/rooms/:id" element={<SingleRoom/>} />
           <Route path="/users" element={<Users/>} />
           <Route path="/users/:id" element={<UsersSingle/>} />
           <Route path="/contact" element={<Contact/>} />
