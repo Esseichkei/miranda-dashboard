@@ -18,6 +18,7 @@ export const HeaderDiv = styled.div`
     width: 100%;
     height: 120px;
     background-color: #556655;
+    padding-left: ${props => props.sidebarShow ? "365px" : "20px"};
 `;
 export const SidebarDiv = styled.div`
     position: fixed;
