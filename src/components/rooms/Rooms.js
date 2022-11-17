@@ -1,4 +1,4 @@
-import { HeaderDiv, MainDiv, SidebarDiv } from "./RoomsStyles";
+import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField } from "./RoomsStyles";
 import { useState } from "react";
 
 export function Rooms(props) {
@@ -8,8 +8,13 @@ export function Rooms(props) {
     };
     return (<MainDiv sidebarShow={sidebarShow}>
             <HeaderDiv sidebarShow={sidebarShow}>
-                <p>Header!</p>
-                <button onClick={toggleSidebar}>Toggle Sidebar!</button>
+                <HeaderLeftDiv>
+                    <SidebarToggle onClick={toggleSidebar} />
+                    <h2>Room List</h2>
+                </HeaderLeftDiv>
+                <HeaderRightDiv>
+                    <HeaderSearchField type="text"/>
+                </HeaderRightDiv>
             </HeaderDiv>
             <SidebarDiv sidebarShow={sidebarShow}>
                 <p>Sidebar!</p>
