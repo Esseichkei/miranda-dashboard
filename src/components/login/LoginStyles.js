@@ -1,4 +1,18 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+
+const shakeLoginButton = keyframes`
+    0% {transform: translateX(0%);}
+    20% {transform: translateX(20%);}
+    40% {transform: translateX(-20%);}
+    60% {transform: translateX(20%);}
+    80% {transform: translateX(-20%);}
+    100% {transform: translateX(0%);}
+`;
+const shakeLoginButtonCss = css`
+    animation-name: ${shakeLoginButton};
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+`;
 
 export const LoginFullScreen = styled.div`
     height: 100vh;
@@ -48,7 +62,9 @@ export const LoginButton = styled.input`
     margin: 20px;
     width: 150px;
     font-size: 18px;
+    transition: background-color 0.5s;
     &:hover {
         background-color: ${props => props.failed ? "#CCAAAA": "#BBBBBB"};
     }
+    ${props => props.failed ? shakeLoginButtonCss : ""}
 `;

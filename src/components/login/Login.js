@@ -1,5 +1,5 @@
 import { AuthContext } from "../auth";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { LoginContainer, LoginFullScreen, LoginForm, LoginInputDiv, LoginButton, LoginInputField } from "./LoginStyles";
 
@@ -22,6 +22,12 @@ export function Login(props) {
             setFailed(true);
         }
     }
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setFailed(false);
+        }, 1000);
+        return () => {clearTimeout(timeoutId);};
+    },[failed]);
     if (auth.isLoggedIn()) {
         return <Navigate to='/'/>;
     } else {
