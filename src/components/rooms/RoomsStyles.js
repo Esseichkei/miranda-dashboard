@@ -1,6 +1,15 @@
 import styled from "styled-components";
 import SidebarToggleImg from "../../img/hamburger-menu-icon.svg"
 import MagnifyingGlassImg from "../../img/magnifier-glass-icon.svg"
+import HeartImg from "../../img/heart-thin-icon.svg";
+import EnvelopeImg from "../../img/email-icon.svg";
+import BellImg from "../../img/notification-bell-icon.svg";
+import MessageImg from "../../img/message-icon.svg";
+import GridImg from "../../img/grid-interface-layout-icon.svg";
+import KeyImg from "../../img/key-line-icon.svg";
+import CalendarImg from "../../img/schedule-calendar-icon.svg";
+import AvatarImg from "../../img/male-icon.svg";
+import JigsawImg from "../../img/extension-icon.svg";
 
 export const MainDiv = styled.div`
     position: relative;
@@ -50,7 +59,7 @@ export const SidebarToggle = styled.div`
 `;
 export const HeaderRightDiv = styled.div`
     display: inline-flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     height: 100%;
     width: 65%;
@@ -77,4 +86,32 @@ export const SidebarDiv = styled.div`
     width: 345px;
     background-color: #FFFFFF;
     box-shadow: 13px 3px 40px #00000005;
+`;
+export const IconDiv = styled.div`
+    margin: 20px;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    flex-shrink: 0;
+`;
+export const HeartDiv = styled(IconDiv)`
+    background-image: url(${HeartImg});
+`;
+export const EnvelopeDiv = styled(IconDiv)`
+    background-image: url(${EnvelopeImg});
+`;
+export const BellDiv = styled(IconDiv)`
+    background-image: url(${BellImg});
+`;
+export const MessaageDiv = styled(IconDiv)`
+    background-image: url(${MessageImg});
+`;
+export const UserDiv = styled.div`
+    margin: 20px;
+    height: 60px;
+    width: 60px;
+    border-radius: 8px;
+    background-color: #AAAAAA;
+    flex-shrink: 0;
 `;

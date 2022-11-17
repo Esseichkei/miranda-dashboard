@@ -1,4 +1,4 @@
-import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField } from "./RoomsStyles";
+import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv } from "./RoomsStyles";
 import { useState } from "react";
 
 export function Rooms(props) {
@@ -14,6 +14,11 @@ export function Rooms(props) {
                 </HeaderLeftDiv>
                 <HeaderRightDiv>
                     <HeaderSearchField type="text"/>
+                    <HeartDiv />
+                    <EnvelopeDiv />
+                    <BellDiv />
+                    <MessaageDiv />
+                    <UserDiv />
                 </HeaderRightDiv>
             </HeaderDiv>
             <SidebarDiv sidebarShow={sidebarShow}>
