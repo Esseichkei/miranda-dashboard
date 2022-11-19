@@ -139,7 +139,7 @@ export const SidebarNavLink = styled(NavLink)`
     padding-left: 100px;
     margin: 40px 0;
     border-left: 5px solid transparent;
-    transition: border-left-width 0.5s, color 0.5s, background-color 0.5s;
+    transition: border-left-color 0.5s, color 0.5s, background-color 0.5s;
     color: #111111;
     background-color: #FFFFFF;
     &:hover {
