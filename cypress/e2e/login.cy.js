@@ -1,18 +1,20 @@
 describe('Authentication', () => {
+  beforeEach(() => {
+    cy.visit('/')
+  });
   it('Logs In', () => {
-    cy.visit('http://localhost:3000/')
+    cy.url().should('include', '/login');
     cy.get('[name="user"]').type('cat');
     cy.get('[name="password"]').type('meow');
     cy.contains('Log in').click();
-    cy.get('h1').should('contain', 'Dashboard!');
+    cy.url().should('include', '/');
     cy.contains('Log out').click();
-    cy.get('h1').should('contain', 'Login!');
+    cy.url().should('include', '/login');
   })
   it('Fails To Log In', () => {
-    cy.visit('http://localhost:3000/')
     cy.get('[name="user"]').type('fuck');
     cy.get('[name="password"]').type('you');
     cy.contains('Log in').click();
-    cy.get('h1').should('contain', 'Login!');
+    cy.url().should('include', '/login');
   })
 })

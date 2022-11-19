@@ -5,11 +5,11 @@ import HeartImg from "../../img/heart-thin-icon.svg";
 import EnvelopeImg from "../../img/email-icon.svg";
 import BellImg from "../../img/notification-bell-icon.svg";
 import MessageImg from "../../img/message-icon.svg";
-import GridImg from "../../img/grid-interface-layout-icon.svg";
-import KeyImg from "../../img/key-line-icon.svg";
-import CalendarImg from "../../img/schedule-calendar-icon.svg";
-import AvatarImg from "../../img/male-icon.svg";
-import JigsawImg from "../../img/extension-icon.svg";
+import HotelImg from "../../img/residential-apartments-icon.svg";
+import { NavLink } from "react-router-dom";
+// import CalendarImg from "../../img/schedule-calendar-icon.svg";
+// import AvatarImg from "../../img/male-icon.svg";
+// import JigsawImg from "../../img/extension-icon.svg";
 
 export const MainDiv = styled.div`
     position: relative;
@@ -76,17 +76,6 @@ export const HeaderSearchField = styled.input`
     font-size: 16px;
     margin: 10px;
 `;
-export const SidebarDiv = styled.div`
-    position: fixed;
-    height: 100vh;
-    top: 0;
-    transition: left 0.3s ease-out;
-    padding: 20px;
-    left: ${props => props.sidebarShow === true ? "0" : "-345px"};
-    width: 345px;
-    background-color: #FFFFFF;
-    box-shadow: 13px 3px 40px #00000005;
-`;
 export const IconDiv = styled.div`
     margin: 20px;
     width: 25px;
@@ -114,4 +103,73 @@ export const UserDiv = styled.div`
     border-radius: 8px;
     background-color: #AAAAAA;
     flex-shrink: 0;
+`;
+
+export const SidebarDiv = styled.div`
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    transition: left 0.3s ease-out;
+    padding: 20px 0;
+    left: ${props => props.sidebarShow === true ? "0" : "-345px"};
+    width: 345px;
+    background-color: #FFFFFF;
+    box-shadow: 13px 3px 40px #00000005;
+`;
+export const SidebarTitle = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 80px;
+`;
+export const SidebarTitleIcon = styled.div`
+    background-image: url(${HotelImg});
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 60px;
+    height: 52px;
+    margin-right: 20px;
+`;
+export const SidebarNavLink = styled(NavLink)`
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 100px;
+    margin: 40px 0;
+    border-left: 5px solid transparent;
+    transition: border-left-width 0.5s, color 0.5s, background-color 0.5s;
+    color: #111111;
+    background-color: #FFFFFF;
+    &:hover {
+        background-color: #EEEEEE;
+    }
+    &.active {
+        border-left-color: #44AABB;
+        color: #44AABB;
+    }
+`;
+export const SidebarIconWrapper = styled.div`
+svg {
+    width: 25px;
+    height: 25px;
+    margin-right: 20px;
+    transtion: width 0.5 ease-in-out, height 0.5 ease-in-out;
+    & path {
+        stroke: #111111;
+        fill: #111111;
+        transition: stroke 0.5s, fill 0.5s;
+    }
+}
+.active & {
+    svg {
+        width: 30px;
+        height: 30px;
+        & path {
+            stroke: #44AABB;
+            fill: #44AABB;
+        }
+    }
+}
 `;
