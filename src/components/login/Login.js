@@ -5,21 +5,24 @@ import { LoginContainer, LoginFullScreen, LoginForm, LoginInputDiv, LoginButton,
 
 export function Login(props) {
     const auth = useContext(AuthContext);
-    const [user, setUser] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [failed, setFailed] = useState(false);
-    const changeUser = (ev) => {
-        setUser(ev.target.value);
+    const changeEmail = (ev) => {
+        setEmail(ev.target.value);
     };
     const changePass = (ev) => {
         setPassword(ev.target.value);
     }
     const tryLoggingIn = (ev) => {
         ev.preventDefault();
-        if (!auth.logIn(user, password)) {
-            setUser('');
+        if (email !== "cat@catmail.com" || password !== "meow") {
+            setEmail('');
             setPassword('');
             setFailed(true);
+        }
+        else {
+            auth.authDispatch({type: 'login'});
         }
     }
     useEffect(() => {
@@ -28,7 +31,7 @@ export function Login(props) {
         }, 1000);
         return () => {clearTimeout(timeoutId);};
     },[failed]);
-    if (auth.isLoggedIn()) {
+    if (auth.authState.authenticated) {
         return <Navigate to='/'/>;
     } else {
         return (
@@ -37,8 +40,8 @@ export function Login(props) {
                     <h1>Login!</h1>
                     <LoginForm onSubmit={tryLoggingIn}>
                         <LoginInputDiv>
-                            <label htmlFor='user'>User</label>
-                            <LoginInputField type='text' name='user' value={user} onChange={changeUser} autoComplete='username'></LoginInputField>
+                            <label htmlFor='email'>User</label>
+                            <LoginInputField type='text' name='email' value={email} onChange={changeEmail} autoComplete='email'></LoginInputField>
                         </LoginInputDiv>
                         <LoginInputDiv>
                             <label htmlFor='password'>Password</label>

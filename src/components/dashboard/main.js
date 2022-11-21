@@ -5,9 +5,9 @@ import { Navigate } from "react-router-dom";
 export function Dashboard (props) {
     const auth = useContext(AuthContext);
     const tryLoggingOut = () => {
-        auth.logOut();
+        auth.authDispatch({type: 'logout'});
     }
-    if (auth.isLoggedIn()) {
+    if (auth.authState.authenticated) {
         return (
             <div>
                 <h1>Dashboard!</h1>

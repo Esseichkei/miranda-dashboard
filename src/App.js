@@ -10,32 +10,30 @@ import { UsersSingle } from "./components/users/single";
 import { Contact } from "./components/contact/main";
 import { ContactSingle } from "./components/contact/single";
 import { AuthContext } from "./components/auth";
-import { useState } from "react";
+import { useReducer } from "react";
 
 function App() {
-  const [authData, authDataSetter] = useState(sessionStorage.getItem('loggedIn') !== undefined ? sessionStorage.getItem('loggedIn') : false)
-  function isLoggedIn() {
-    return authData;
-  }
-  function logIn(user, password) {
-    if (user === 'cat' && password === 'meow') {
-        authDataSetter(true);
-        sessionStorage.setItem('loggedIn', 'true');
-        return true;
+  const authReducer = (state, action) => {
+    switch(action.type) {
+      case 'login':
+        sessionStorage.setItem('loggedIn', true);
+        return {...state, authenticated: true};
+      case 'logout':
+        sessionStorage.removeItem('loggedIn');
+        return {...state, authenticated: false};
+      case 'changeUsername':
+        return {...state, username: action.payload.username};
+      case 'changeEmail':
+        return {...state, password: action.payload.email};
+      default:
+        return {...state};
     }
-    else {
-        return false;
-    }
-  }
-  function logOut() {
-    authDataSetter(false);
-    sessionStorage.removeItem('loggedIn');
-    return false;
-  }
+  };
+  const [authState, authDispatch] = useReducer(authReducer, {authenticated: sessionStorage.getItem('loggedIn') !== undefined ? sessionStorage.getItem('loggedIn') : false, username: 'cat', email: 'cat@catmail.com'})
+  
   return (
-    <AuthContext.Provider value={ {isLoggedIn: isLoggedIn,
-        logIn: logIn,
-        logOut: logOut,
+    <AuthContext.Provider value={ {authState: authState,
+        authDispatch: authDispatch
       }
     }>
       <BrowserRouter>
