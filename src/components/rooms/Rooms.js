@@ -1,4 +1,4 @@
-import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv, SidebarTitle, SidebarTitleIcon, SidebarNavLink, SidebarIconWrapper } from "./RoomsStyles";
+import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv, SidebarTitle, SidebarTitleIcon, SidebarNavLink, SidebarIconWrapper, SidebarUserDiv, SidebarUserAvatar, SidebarUserEmail, SidebarUserButton, SidebarBylineDiv, SidebarBylineBlack, SidebarBylineGrey, SidebarBylineGreyLast } from "./RoomsStyles";
 import { useState } from "react";
 import { ReactComponent as GridSvg } from "../../img/grid-interface-layout-icon.svg";
 import { ReactComponent as KeySvg } from "../../img/key-line-icon.svg";
@@ -51,6 +51,17 @@ export function Rooms(props) {
                     <SidebarIconWrapper><JigsawSvg /></SidebarIconWrapper>
                     <h3>Contact</h3>
                 </SidebarNavLink>
+                <SidebarUserDiv>
+                    <SidebarUserAvatar />
+                    <h4>Cat Cattington</h4>
+                    <SidebarUserEmail>cat@catmail.com</SidebarUserEmail>
+                    <SidebarUserButton>Log out</SidebarUserButton>
+                </SidebarUserDiv>
+                <SidebarBylineDiv>
+                    <SidebarBylineBlack>Miranda Dashboard Software</SidebarBylineBlack>
+                    <SidebarBylineGrey>All rights reserved, 2022</SidebarBylineGrey>
+                    <SidebarBylineGreyLast>Made by Andres F. Pelaez with love!</SidebarBylineGreyLast>
+                </SidebarBylineDiv>
             </SidebarDiv>
             <h1>Rooms!</h1>
         </MainDiv>);

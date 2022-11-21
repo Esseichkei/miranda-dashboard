@@ -138,6 +138,7 @@ export const SidebarNavLink = styled(NavLink)`
     align-items: center;
     padding-left: 100px;
     margin: 40px 0;
+    border-radius: 5px;
     border-left: 5px solid transparent;
     transition: border-left-color 0.5s, color 0.5s, background-color 0.5s;
     color: #111111;
@@ -172,4 +173,54 @@ svg {
         }
     }
 }
+`;
+export const SidebarUserDiv = styled.div`
+    width: 233px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 56px 40px;
+    box-shadow: 0px 20px 30px #00000014;
+    border-radius: 18px;
+`;
+export const SidebarUserAvatar = styled.div`
+    width: 70px;
+    height: 70px;
+    margin: -35px 0 15px;
+    border-radius: 8px;
+    background-color: #C5C5C5;
+`;
+export const SidebarUserEmail = styled.p`
+    color: #B2B2B2;
+    font-size: 12px;
+    margin: 12px 0;
+`;
+export const SidebarUserButton = styled.button`
+    background-color: #EBF1EF;
+    border-radius: 8px;
+    border: 0px none transparent;
+    text-align: center;
+    color: #135846;
+    width: 158px;
+    height: 47px;
+    padding: 14px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    font-weight: 600;
+`;
+export const SidebarBylineDiv = styled.div`
+    margin: 20px 20px 20px 56px;
+`;
+export const SidebarBylineGrey = styled.p`
+    color: #799283;
+    font-size: 14px;
+`;
+export const SidebarBylineBlack = styled.p`
+    color: #212121;
+    font-size: 16px;
+    margin: 10px 0;
+`;
+export const SidebarBylineGreyLast = styled(SidebarBylineGrey)`
+    margin-top: 30px;
 `;
