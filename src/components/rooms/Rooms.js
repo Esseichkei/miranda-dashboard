@@ -1,10 +1,11 @@
-import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv, SidebarTitle, SidebarTitleIcon, SidebarNavLink, SidebarIconWrapper, SidebarUserDiv, SidebarUserAvatar, SidebarUserEmail, SidebarUserButton, SidebarBylineDiv, SidebarBylineBlack, SidebarBylineGrey, SidebarBylineGreyLast } from "./RoomsStyles";
+import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv, SidebarTitle, SidebarTitleIcon, SidebarNavLink, SidebarIconWrapper, SidebarUserDiv, SidebarUserAvatar, SidebarUserEmail, SidebarUserButton, SidebarBylineDiv, SidebarBylineBlack, SidebarBylineGrey, SidebarBylineGreyLast, TopRowDiv, TopRowTab, TopRowTabDiv, TopRowButton, MainTable, MainTableRow, MainTableHead } from "./RoomsStyles";
 import { useState } from "react";
 import { ReactComponent as GridSvg } from "../../img/grid-interface-layout-icon.svg";
 import { ReactComponent as KeySvg } from "../../img/key-line-icon.svg";
 import { ReactComponent as CalendarSvg} from "../../img/schedule-calendar-icon.svg";
 import { ReactComponent as AvatarSvg} from "../../img/male-icon.svg";
 import { ReactComponent as JigsawSvg} from "../../img/extension-icon.svg";
+import { RoomsListItem } from "./RoomsListItem";
 
 export function Rooms(props) {
     const [sidebarShow, setSidebarShow] = useState(true);
@@ -63,6 +64,51 @@ export function Rooms(props) {
                     <SidebarBylineGreyLast>Made by Andres F. Pelaez with love!</SidebarBylineGreyLast>
                 </SidebarBylineDiv>
             </SidebarDiv>
-            <h1>Rooms!</h1>
+            <TopRowDiv>
+                <TopRowTabDiv>
+                    <TopRowTab active={true}>
+                        All Rooms
+                    </TopRowTab>
+                    <TopRowTab>
+                        Occupied Rooms
+                    </TopRowTab>
+                    <TopRowTab>
+                        Available Rooms
+                    </TopRowTab>
+                </TopRowTabDiv>
+                <div>
+                    <TopRowButton active={true}>+ New Room</TopRowButton>
+                    <TopRowButton>Newest</TopRowButton>
+                </div>
+            </TopRowDiv>
+            <MainTable>
+                <thead>
+                    <MainTableRow>
+                        <MainTableHead></MainTableHead>
+                        <MainTableHead>
+                            Room Name
+                        </MainTableHead>
+                        <MainTableHead>
+                            Bed Type
+                        </MainTableHead>
+                        <MainTableHead>
+                            Room Floor
+                        </MainTableHead>
+                        <MainTableHead>
+                            Facilities
+                        </MainTableHead>
+                        <MainTableHead>
+                            Rate
+                        </MainTableHead>
+                        <MainTableHead>
+                            Status
+                        </MainTableHead>
+                        <MainTableHead></MainTableHead>
+                    </MainTableRow>
+                </thead>
+                <tbody>
+                    <RoomsListItem selected={false} occupied={false}/>
+                </tbody>
+            </MainTable>
         </MainDiv>);
 }

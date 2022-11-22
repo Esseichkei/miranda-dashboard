@@ -17,12 +17,101 @@ export const MainDiv = styled.div`
     width: 100%;
     min-height: 100vh;
     background-color: #F8F8F8;
-    padding-top: 140px;
+    padding-top: 170px;
     transition: padding-left 0.3s ease-out;
-    padding-left: ${props => props.sidebarShow === true ? "365px" : "20px"};
-    padding-right: 20px;
-    padding-bottom: 20px;
+    padding-left: ${props => props.sidebarShow === true ? "395px" : "50px"};
+    padding-right: 50px;
+    padding-bottom: 50px;
 `;
+export const TopRowDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+export const TopRowTabDiv = styled.div`
+    display: flex;
+`
+export const TopRowTab = styled.div`
+    padding: 14px 32px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${props => props.active === true ? "#135846" : "#6E6E6E" };
+    border-bottom-color: ${props => props.active === true ? "#135846" : "#D4D4D4" };
+`;
+export const TopRowButton = styled.button`
+    border: 1px solid #135846;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 13px 50px;
+    color: ${props => props.active === true ? "#FFFFFF" : "#135846"};
+    background-color: ${props => props.active === true ? "#135846" : "transparent"};
+    border-radius: 12px;
+`;
+export const MainTable = styled.table`
+    width: 100%;
+    box-shadow: 0px 4px 4px #00000005;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    border-collapse: separate;
+    border-spacing: 0 2px;
+`;
+export const MainTableRow = styled.tr`
+`;
+export const MainTableHead = styled.th`
+    padding: 20px 10px;
+    font-size: 18px;
+    border-bottom: 2px solid #F8F8F8;
+`;
+export const MainTableData = styled.td`
+    padding: 20px 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 1px solid #F8F8F8;
+`;
+export const TableItemCheck = styled.div`
+    display: inline-block;
+    vertical-align: baseline;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border: 2px solid #707070;
+    padding: 3px;
+`;
+export const TableItemCheckPilot = styled.div`
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background-color: #707070;
+    opacity: ${props => props.selected === true ? "1" : "0"};
+`;
+export const TableItemImg = styled.div`
+    display: inline-block;
+    vertical-align: middle;
+    width: 150px;
+    height: 77px;
+    border-radius: 8px;
+    background-color: #C5C5C5;
+    background-size: cover;
+    margin: 0 10px;
+`;
+export const TableItemStatus = styled.div`
+    width: 125px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    border-radius: 12px;
+    background-color: ${props => props.occupied === true ? "#E23428" : "#5AD07A"};
+`;
+
 export const HeaderDiv = styled.div`
     position: fixed;
     top: 0;
