@@ -62,6 +62,7 @@ export const MainTable = styled.table`
     border-spacing: 0 2px;
 `;
 export const MainTableRow = styled.tr`
+    ${props => props.selected === true ? "box-shadow: 0px 4px 30px #00000014;" : ""}
 `;
 export const MainTableHead = styled.th`
     padding: 20px 10px;
@@ -110,6 +111,15 @@ export const TableItemStatus = styled.div`
     color: #FFFFFF;
     border-radius: 12px;
     background-color: ${props => props.occupied === true ? "#E23428" : "#5AD07A"};
+`;
+export const TableItemThreeDots = styled.div`
+    `;
+export const TableItemThreeDotsDot = styled.div`
+    background-color: #6E6E6E;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin: 2px;
 `;
 
 export const HeaderDiv = styled.div`
@@ -226,7 +236,9 @@ export const SidebarNavLink = styled(NavLink)`
     justify-content: flex-start;
     align-items: center;
     padding-left: 100px;
-    margin: 40px 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 20px 0;
     border-radius: 5px;
     border-left: 5px solid transparent;
     transition: border-left-color 0.5s, color 0.5s, background-color 0.5s;

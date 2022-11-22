@@ -1,13 +1,14 @@
-import { MainTableData, MainTableRow, TableItemCheck, TableItemCheckPilot, TableItemImg, TableItemStatus } from "./RoomsStyles";
+import { MainTableData, MainTableRow, TableItemThreeDots, TableItemThreeDotsDot, TableItemCheck, TableItemCheckPilot, TableItemImg, TableItemStatus } from "./RoomsStyles";
 import { useState } from "react";
+import { DelayRandomly } from "../../helpers";
 
 export function RoomsListItem(props) {
     const [selected, setSelected] = useState(props.selected === true ? true : false);
     const handleCheckClick = () => {
-        setSelected(!selected);
+        setSelected(!selected); //DelayRandomly works with 'await DelayRandomly();'
     };
     return (
-        <MainTableRow>
+        <MainTableRow selected={selected}>
             <MainTableData>
                 <TableItemCheck onClick={handleCheckClick}>
                     <TableItemCheckPilot selected={selected} />
@@ -35,7 +36,11 @@ export function RoomsListItem(props) {
                 </TableItemStatus>
             </MainTableData>
             <MainTableData>
-                L
+                <TableItemThreeDots>
+                    <TableItemThreeDotsDot />
+                    <TableItemThreeDotsDot />
+                    <TableItemThreeDotsDot />
+                </TableItemThreeDots>
             </MainTableData>
         </MainTableRow>
     );
