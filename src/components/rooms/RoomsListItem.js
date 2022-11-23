@@ -27,7 +27,7 @@ export function RoomsListItem(props) {
                 AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi
             </MainTableData>
             <MainTableData>
-                $145 / night
+                <b>${props.room.price}</b> / night
             </MainTableData>
             <MainTableData>
                 <TableItemStatus occupied={props.occupied}>

@@ -1,4 +1,4 @@
-import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv, SidebarTitle, SidebarTitleIcon, SidebarNavLink, SidebarIconWrapper, SidebarUserDiv, SidebarUserAvatar, SidebarUserEmail, SidebarUserButton, SidebarBylineDiv, SidebarBylineBlack, SidebarBylineGrey, SidebarBylineGreyLast, TopRowDiv, TopRowTab, TopRowTabDiv, TopRowButton, MainTable, MainTableRow, MainTableHead } from "./RoomsStyles";
+import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv, SidebarTitle, SidebarTitleIcon, SidebarNavLink, SidebarIconWrapper, SidebarUserDiv, SidebarUserAvatar, SidebarUserEmail, SidebarUserButton, SidebarBylineDiv, SidebarBylineBlack, SidebarBylineGrey, SidebarBylineGreyLast, TopRowDiv, TopRowTab, TopRowTabDiv, TopRowButton, MainTable, MainTableRow, MainTableHead, MainSection, PaginationDiv, PaginationButton, PaginationNumberDiv, PaginationNumber, PaginationRightDiv } from "./RoomsStyles";
 import { useState } from "react";
 import { ReactComponent as GridSvg } from "../../img/grid-interface-layout-icon.svg";
 import { ReactComponent as KeySvg } from "../../img/key-line-icon.svg";
@@ -21,7 +21,7 @@ export function Rooms(props) {
     }
     let renderedRooms;
     if (rooms.fulfilled === true) {
-        renderedRooms = rooms.rooms.map((item, id) => {
+        renderedRooms = rooms.rooms.slice(0, 10).map((item, id) => {
             return <RoomsListItem selected={false} loaded={rooms.fulfilled} room={item} key={id}/>;
         });
     } else {
@@ -79,51 +79,68 @@ export function Rooms(props) {
                     <SidebarBylineGreyLast>Made by Andres F. Pelaez with love!</SidebarBylineGreyLast>
                 </SidebarBylineDiv>
             </SidebarDiv>
-            <TopRowDiv>
-                <TopRowTabDiv>
-                    <TopRowTab active={true}>
-                        All Rooms
-                    </TopRowTab>
-                    <TopRowTab>
-                        Occupied Rooms
-                    </TopRowTab>
-                    <TopRowTab>
-                        Available Rooms
-                    </TopRowTab>
-                </TopRowTabDiv>
+            <MainSection>
                 <div>
-                    <TopRowButton active={true}>+ New Room</TopRowButton>
-                    <TopRowButton>Newest</TopRowButton>
+                    <TopRowDiv>
+                        <TopRowTabDiv>
+                            <TopRowTab active={true}>
+                                All Rooms
+                            </TopRowTab>
+                            <TopRowTab>
+                                Occupied Rooms
+                            </TopRowTab>
+                            <TopRowTab>
+                                Available Rooms
+                            </TopRowTab>
+                        </TopRowTabDiv>
+                        <div>
+                            <TopRowButton active={true}>+ New Room</TopRowButton>
+                            <TopRowButton>Newest</TopRowButton>
+                        </div>
+                    </TopRowDiv>
+                    <MainTable>
+                        <thead>
+                            <MainTableRow>
+                                <MainTableHead></MainTableHead>
+                                <MainTableHead>
+                                    Room Name
+                                </MainTableHead>
+                                <MainTableHead>
+                                    Bed Type
+                                </MainTableHead>
+                                <MainTableHead>
+                                    Room Floor
+                                </MainTableHead>
+                                <MainTableHead>
+                                    Facilities
+                                </MainTableHead>
+                                <MainTableHead>
+                                    Rate
+                                </MainTableHead>
+                                <MainTableHead>
+                                    Status
+                                </MainTableHead>
+                                <MainTableHead></MainTableHead>
+                            </MainTableRow>
+                        </thead>
+                        <tbody>
+                            {renderedRooms}
+                        </tbody>
+                    </MainTable>
                 </div>
-            </TopRowDiv>
-            <MainTable>
-                <thead>
-                    <MainTableRow>
-                        <MainTableHead></MainTableHead>
-                        <MainTableHead>
-                            Room Name
-                        </MainTableHead>
-                        <MainTableHead>
-                            Bed Type
-                        </MainTableHead>
-                        <MainTableHead>
-                            Room Floor
-                        </MainTableHead>
-                        <MainTableHead>
-                            Facilities
-                        </MainTableHead>
-                        <MainTableHead>
-                            Rate
-                        </MainTableHead>
-                        <MainTableHead>
-                            Status
-                        </MainTableHead>
-                        <MainTableHead></MainTableHead>
-                    </MainTableRow>
-                </thead>
-                <tbody>
-                    {renderedRooms}
-                </tbody>
-            </MainTable>
+                <PaginationDiv>
+                    <p>Showing 10 of {rooms.rooms.length} items</p>
+                    <PaginationRightDiv>
+                        <PaginationButton>Prev</PaginationButton>
+                            <PaginationNumberDiv>
+                                <PaginationNumber active={true}>1</PaginationNumber>
+                                <PaginationNumber>2</PaginationNumber>
+                                <PaginationNumber>3</PaginationNumber>
+                                <PaginationNumber>4</PaginationNumber>
+                            </PaginationNumberDiv>
+                        <PaginationButton>Next</PaginationButton>
+                    </PaginationRightDiv>
+                </PaginationDiv>
+            </MainSection>
         </MainDiv>);
 }
