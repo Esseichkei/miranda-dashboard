@@ -19,6 +19,14 @@ export function Rooms(props) {
     if (rooms.initialized !== true) {
         dispatch(fetchRooms());
     }
+    let renderedRooms;
+    if (rooms.fulfilled === true) {
+        renderedRooms = rooms.rooms.map((item, id) => {
+            return <RoomsListItem selected={false} loaded={rooms.fulfilled} room={item} key={id}/>;
+        });
+    } else {
+        renderedRooms = <RoomsListItem selected={false} loaded={rooms.fulfilled} room={false}/>;
+    }
     return (<MainDiv sidebarShow={sidebarShow}>
             <HeaderDiv sidebarShow={sidebarShow}>
                 <HeaderLeftDiv>
@@ -114,7 +122,7 @@ export function Rooms(props) {
                     </MainTableRow>
                 </thead>
                 <tbody>
-                    <RoomsListItem selected={false} occupied={false} room={false}/>
+                    {renderedRooms}
                 </tbody>
             </MainTable>
         </MainDiv>);

@@ -58,7 +58,7 @@ export const fetchRooms = createAsyncThunk('rooms/fetchRooms', async (arg, Thunk
     {"room_number":47,"id":"DELUXE-R28443","room_type":2,"facilities":"0-1-1-0-0-1-0","price":363,"availability":1},
     {"room_number":48,"id":"DELUXE-R68915","room_type":4,"facilities":"1-1-0-0-0-1-0","price":383,"availability":1},
     {"room_number":49,"id":"DELUXE-R41601","room_type":1,"facilities":"0-0-1-1-1-0-1","price":384,"availability":0},
-    {"room_number":50,"id":"DELUXE-R95477","room_type":2,"facilities":"0-1-0-1-0-1-0","price":395,"availability":0}]
+    {"room_number":50,"id":"DELUXE-R95477","room_type":2,"facilities":"0-1-0-1-0-1-0","price":395,"availability":0}];
     return roomsData;
 });
 
@@ -76,7 +76,7 @@ export const RoomsSlice = createSlice({
             // Add user to the state array
             state.fulfilled = true;
             state.hasError = false;
-            state.rooms.push(action.payload)
+            state.rooms.push(...action.payload)
         });
         builder.addCase(fetchRooms.pending, (state, payload) => {
             state.initialized = true;
