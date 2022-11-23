@@ -6,15 +6,19 @@ import { ReactComponent as CalendarSvg} from "../../img/schedule-calendar-icon.s
 import { ReactComponent as AvatarSvg} from "../../img/male-icon.svg";
 import { ReactComponent as JigsawSvg} from "../../img/extension-icon.svg";
 import { RoomsListItem } from "./RoomsListItem";
-import { useSelector } from "react-redux";
-import { selectRooms } from "./RoomsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRooms, fetchRooms } from "./RoomsSlice";
 
 export function Rooms(props) {
     const rooms = useSelector(selectRooms);
+    const dispatch = useDispatch();
     const [sidebarShow, setSidebarShow] = useState(true);
     const toggleSidebar = () => {
         setSidebarShow(!sidebarShow);
     };
+    if (rooms.initialized !== true) {
+        dispatch(fetchRooms());
+    }
     return (<MainDiv sidebarShow={sidebarShow}>
             <HeaderDiv sidebarShow={sidebarShow}>
                 <HeaderLeftDiv>

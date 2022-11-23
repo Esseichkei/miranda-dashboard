@@ -5,7 +5,7 @@ export const selectRooms = (state) => {
     return state.rooms;
 }
 
-const fetchRooms = createAsyncThunk('rooms/fetchRooms', async (arg, ThunkAPI) => {
+export const fetchRooms = createAsyncThunk('rooms/fetchRooms', async (arg, ThunkAPI) => {
     await DelayRandomly();
     // const request = await fetch(endpoint + 'rooms?request="fetchAll");
     // const data = await JSON.parse(request.data);
@@ -65,6 +65,7 @@ const fetchRooms = createAsyncThunk('rooms/fetchRooms', async (arg, ThunkAPI) =>
 export const RoomsSlice = createSlice({
     name: 'rooms',
     initialState: {
+        fulfilled: false,
         initialized: false,
         hasError: false,
         rooms: []
@@ -78,6 +79,7 @@ export const RoomsSlice = createSlice({
             state.rooms.push(action.payload)
         });
         builder.addCase(fetchRooms.pending, (state, payload) => {
+            state.initialized = true;
             state.fulfilled = false;
             state.hasError = false;
         });
