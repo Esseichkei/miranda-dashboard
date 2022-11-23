@@ -6,8 +6,11 @@ import { ReactComponent as CalendarSvg} from "../../img/schedule-calendar-icon.s
 import { ReactComponent as AvatarSvg} from "../../img/male-icon.svg";
 import { ReactComponent as JigsawSvg} from "../../img/extension-icon.svg";
 import { RoomsListItem } from "./RoomsListItem";
+import { useSelector } from "react-redux";
+import { selectRooms } from "./RoomsSlice";
 
 export function Rooms(props) {
+    const rooms = useSelector(selectRooms);
     const [sidebarShow, setSidebarShow] = useState(true);
     const toggleSidebar = () => {
         setSidebarShow(!sidebarShow);
@@ -107,7 +110,7 @@ export function Rooms(props) {
                     </MainTableRow>
                 </thead>
                 <tbody>
-                    <RoomsListItem selected={false} occupied={false}/>
+                    <RoomsListItem selected={false} occupied={false} room={false}/>
                 </tbody>
             </MainTable>
         </MainDiv>);

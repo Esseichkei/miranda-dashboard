@@ -27,6 +27,7 @@ export const TopRowDiv = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 20px 0;
 `;
 export const TopRowTabDiv = styled.div`
     display: flex;

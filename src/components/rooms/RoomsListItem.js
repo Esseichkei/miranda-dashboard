@@ -1,6 +1,5 @@
 import { MainTableData, MainTableRow, TableItemThreeDots, TableItemThreeDotsDot, TableItemCheck, TableItemCheckPilot, TableItemImg, TableItemStatus } from "./RoomsStyles";
 import { useState } from "react";
-import { DelayRandomly } from "../../helpers";
 
 export function RoomsListItem(props) {
     const [selected, setSelected] = useState(props.selected === true ? true : false);

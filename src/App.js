@@ -11,6 +11,8 @@ import { Contact } from "./components/contact/main";
 import { ContactSingle } from "./components/contact/single";
 import { AuthContext } from "./components/auth";
 import { useReducer } from "react";
+import { Provider } from "react-redux";
+import { store } from "./components/store";
 
 function App() {
   const authReducer = (state, action) => {
@@ -32,33 +34,35 @@ function App() {
   const [authState, authDispatch] = useReducer(authReducer, {authenticated: sessionStorage.getItem('loggedIn') !== undefined ? sessionStorage.getItem('loggedIn') : false, username: 'cat', email: 'cat@catmail.com'})
   
   return (
-    <AuthContext.Provider value={ {authState: authState,
-        authDispatch: authDispatch
-      }
-    }>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/bookings" element={<Bookings/>} />
-          <Route path="/bookings/:id" element={<BookingsSingle/>} />
-          <Route path="/rooms" element={<Rooms/>} />
-          <Route path="/rooms/:id" element={<SingleRoom/>} />
-          <Route path="/users" element={<Users/>} />
-          <Route path="/users/:id" element={<UsersSingle/>} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path="/contact/:id" element={<ContactSingle/>} />
-          <Route
-            path="*"
-            element={
-                <main style={{ padding: "16px" }}>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
-        </Routes>
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <Provider store={store}>
+      <AuthContext.Provider value={ {authState: authState,
+          authDispatch: authDispatch
+        }
+      }>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Dashboard/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/bookings" element={<Bookings/>} />
+            <Route path="/bookings/:id" element={<BookingsSingle/>} />
+            <Route path="/rooms" element={<Rooms/>} />
+            <Route path="/rooms/:id" element={<SingleRoom/>} />
+            <Route path="/users" element={<Users/>} />
+            <Route path="/users/:id" element={<UsersSingle/>} />
+            <Route path="/contact" element={<Contact/>} />
+            <Route path="/contact/:id" element={<ContactSingle/>} />
+            <Route
+              path="*"
+              element={
+                  <main style={{ padding: "16px" }}>
+                    <p>There's nothing here!</p>
+                  </main>
+                }
+              />
+          </Routes>
+        </BrowserRouter>
+      </AuthContext.Provider>
+    </Provider>
   );
 }
 
