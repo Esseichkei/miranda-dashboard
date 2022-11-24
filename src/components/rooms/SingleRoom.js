@@ -1,20 +1,13 @@
-import { useParams } from "react-router-dom";
-import { Header } from "../header/Header";
-import { Sidebar } from "../sidebar/Sidebar";
-import { MainDiv } from "./RoomsStyles";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 
 export function SingleRoom (props) {
     const params = useParams();
-    const [sidebarShow, setSidebarShow] = useState(true);
-    const sidebarToggle = () => {
-        setSidebarShow(!sidebarShow);
-    }
+    const setTitle = useOutletContext();
+    useEffect(() => {
+        setTitle(`Room #${params.id}`);
+    }, [params.id, setTitle]);
     return (
-        <MainDiv sidebarShow={sidebarShow}>
-            <Header sidebarShow={sidebarShow} toggleSidebar={sidebarToggle} title={`Room #${params.id}`}/>
-            <Sidebar sidebarShow={sidebarShow} />
-            <h1>Room #{params.id}</h1>
-        </MainDiv>
+        <h1>Room #{params.id}</h1>
     );
 }

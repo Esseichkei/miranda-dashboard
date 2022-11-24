@@ -13,6 +13,7 @@ import { AuthContext } from "./components/auth";
 import { useReducer } from "react";
 import { Provider } from "react-redux";
 import { store } from "./components/store";
+import { Page } from "./pages/Page";
 
 function App() {
   const authReducer = (state, action) => {
@@ -46,7 +47,9 @@ function App() {
             <Route path="/bookings" element={<Bookings/>} />
             <Route path="/bookings/:id" element={<BookingsSingle/>} />
             <Route path="/rooms" element={<Rooms/>} />
-            <Route path="/rooms/item/:id" element={<SingleRoom/>} />
+            <Route path="/rooms/item/" element={<Page/>}>
+              <Route path=":id" element={<SingleRoom/>}/>
+            </Route>
             <Route path="/rooms/:page" element={<Rooms/>} />
             <Route path="/users" element={<Users/>} />
             <Route path="/users/:id" element={<UsersSingle/>} />
