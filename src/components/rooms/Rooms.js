@@ -8,10 +8,10 @@ import { ReactComponent as JigsawSvg} from "../../img/extension-icon.svg";
 import { RoomsListItem } from "./RoomsListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRooms, fetchRooms } from "./RoomsSlice";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 const PAGES_SHOWN = 5;
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 const BASE_URL = '/rooms';
 
 export function Rooms(props) {
@@ -21,10 +21,10 @@ export function Rooms(props) {
     let renderedRooms;
     // pagination definitions
     const { page } = useParams();
-    const total_pages = Math.ceil(rooms.rooms.length / ITEMS_PER_PAGE);
-    const activePage = page !== undefined ? Number(page) : 1;
+    const totalPages = Math.max(Math.ceil(rooms.rooms.length / ITEMS_PER_PAGE), 1);
+    const activePage = page === undefined ? 1 : Number(page);
     const pagesStartingFrom = Math.max(1, activePage - Math.floor(PAGES_SHOWN/2));
-    const pagesUpTo = Math.min(total_pages, pagesStartingFrom + PAGES_SHOWN - 1);
+    const pagesUpTo = Math.min(totalPages, pagesStartingFrom + PAGES_SHOWN - 1);
     
     let renderedPages;
     let prevButton;
@@ -47,7 +47,9 @@ export function Rooms(props) {
         renderedRooms = <RoomsListItem selected={false} loaded={rooms.fulfilled} room={false}/>;
     }
     // pagination logic
-
+    if (activePage <= 0 || activePage > totalPages) {
+        return <Navigate to={BASE_URL} replace={false}/>;
+    }
     renderedPages = [];
     for (let i = pagesStartingFrom; i <= pagesUpTo; i++) {
         renderedPages.push(<PaginationNumber to={BASE_URL + (i !== 1 ? `/${i}` : "")} key={i} end>{i}</PaginationNumber>);
@@ -55,7 +57,7 @@ export function Rooms(props) {
     // console.log(typeof activePage) // DEBUG
     // console.log(activePage !== 2 ? `/${activePage - 1}` : "") // DEBUG
     prevButton = activePage !== 1 ? <PaginationButton to={BASE_URL + (activePage !== 2 ? `/${activePage - 1}` : "")}>Prev</PaginationButton>: null;
-    nextButton = activePage !== total_pages ? <PaginationButton to={BASE_URL + `/${activePage + 1}`}>Prev</PaginationButton>: null;
+    nextButton = activePage !== totalPages ? <PaginationButton to={BASE_URL + `/${activePage + 1}`}>Prev</PaginationButton>: null;
 
     return (<MainDiv sidebarShow={sidebarShow}>
             <HeaderDiv sidebarShow={sidebarShow}>
