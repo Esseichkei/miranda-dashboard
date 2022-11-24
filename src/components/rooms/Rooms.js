@@ -40,7 +40,7 @@ export function Rooms(props) {
         dispatch(fetchRooms());
     }
     if (rooms.fulfilled === true) {
-        renderedRooms = rooms.rooms.slice(0, 10).map((item, id) => {
+        renderedRooms = rooms.rooms.slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE).map((item, id) => {
             return <RoomsListItem selected={false} loaded={rooms.fulfilled} room={item} key={id}/>;
         });
     } else {
@@ -81,19 +81,19 @@ export function Rooms(props) {
                     <SidebarIconWrapper><GridSvg /></SidebarIconWrapper>
                     <h3>Dashboard</h3>
                 </SidebarNavLink>
-                <SidebarNavLink to="/rooms" end>
+                <SidebarNavLink to="/rooms">
                     <SidebarIconWrapper><KeySvg /></SidebarIconWrapper>
                     <h3>Rooms</h3>
                 </SidebarNavLink>
-                <SidebarNavLink to="/bookings" end>
+                <SidebarNavLink to="/bookings">
                     <SidebarIconWrapper><CalendarSvg /></SidebarIconWrapper>
                     <h3>Bookings</h3>
                 </SidebarNavLink>
-                <SidebarNavLink to="/users" end>
+                <SidebarNavLink to="/users">
                     <SidebarIconWrapper><AvatarSvg /></SidebarIconWrapper>
                     <h3>Users</h3>
                 </SidebarNavLink>
-                <SidebarNavLink to="/contact" end>
+                <SidebarNavLink to="/contact">
                     <SidebarIconWrapper><JigsawSvg /></SidebarIconWrapper>
                     <h3>Contact</h3>
                 </SidebarNavLink>
