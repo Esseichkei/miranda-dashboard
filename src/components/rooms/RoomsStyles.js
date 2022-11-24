@@ -6,7 +6,7 @@ import EnvelopeImg from "../../img/email-icon.svg";
 import BellImg from "../../img/notification-bell-icon.svg";
 import MessageImg from "../../img/message-icon.svg";
 import HotelImg from "../../img/residential-apartments-icon.svg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const MainDiv = styled.div`
     position: relative;
@@ -37,12 +37,13 @@ export const PaginationRightDiv = styled.div`
     justify-items: center;
     align-items: center;
 `;
-export const PaginationButton = styled.button`
+export const PaginationButton = styled(Link)`
     color: #135846;
     border: 1px solid #135846;
     border-radius: 12px;
     padding: 16px 28px 14px;
     background-color: #FFFFFF;
+    text-decoration: none;
     font-size: 16px;
 `;
 export const PaginationNumberDiv = styled.div`
@@ -53,12 +54,16 @@ export const PaginationNumberDiv = styled.div`
     background-color: #F5F5F5;
     margin: 10px;
 `;
-export const PaginationNumber = styled.div`
-    color: ${props => props.active === true ? "#FFFFFF" : "#393939"};
-    background-color: ${props => props.active === true ? "#135846" : "transparent"};
+export const PaginationNumber = styled(NavLink)`
+    color: #393939;
     font-size: 16px;
+    text-decoration: none;
     padding: 16px 24px 14px;
     border-radius: 12px;
+    &.active {
+        color: #FFFFFF;
+        background-color: #135846;
+    }
 `;
 export const TopRowDiv = styled.div`
     display: flex;

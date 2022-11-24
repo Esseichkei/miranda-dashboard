@@ -30,8 +30,8 @@ export function RoomsListItem(props) {
                 <b>${props.room.price}</b> / night
             </MainTableData>
             <MainTableData>
-                <TableItemStatus occupied={props.occupied}>
-                    {props.occupied === true ? "Booked" : "Available"}
+                <TableItemStatus occupied={props.room.availability === 0}>
+                    {props.room.availability === 0 ? "Booked" : "Available"}
                 </TableItemStatus>
             </MainTableData>
             <MainTableData>

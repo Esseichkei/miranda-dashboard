@@ -8,18 +8,37 @@ import { ReactComponent as JigsawSvg} from "../../img/extension-icon.svg";
 import { RoomsListItem } from "./RoomsListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRooms, fetchRooms } from "./RoomsSlice";
+import { useParams } from "react-router-dom";
+
+const PAGES_SHOWN = 5;
+const ITEMS_PER_PAGE = 5;
+const BASE_URL = '/rooms';
 
 export function Rooms(props) {
+    // itemList definitions
     const rooms = useSelector(selectRooms);
     const dispatch = useDispatch();
+    let renderedRooms;
+    // pagination definitions
+    const { page } = useParams();
+    const total_pages = Math.ceil(rooms.rooms.length / ITEMS_PER_PAGE);
+    const activePage = page !== undefined ? Number(page) : 1;
+    const pagesStartingFrom = Math.max(1, activePage - Math.floor(PAGES_SHOWN/2));
+    const pagesUpTo = Math.min(total_pages, pagesStartingFrom + PAGES_SHOWN - 1);
+    
+    let renderedPages;
+    let prevButton;
+    let nextButton;
+    // sidebar definitions
     const [sidebarShow, setSidebarShow] = useState(true);
     const toggleSidebar = () => {
         setSidebarShow(!sidebarShow);
     };
+    // LOGIC
+    // itemList logic
     if (rooms.initialized !== true) {
         dispatch(fetchRooms());
     }
-    let renderedRooms;
     if (rooms.fulfilled === true) {
         renderedRooms = rooms.rooms.slice(0, 10).map((item, id) => {
             return <RoomsListItem selected={false} loaded={rooms.fulfilled} room={item} key={id}/>;
@@ -27,6 +46,17 @@ export function Rooms(props) {
     } else {
         renderedRooms = <RoomsListItem selected={false} loaded={rooms.fulfilled} room={false}/>;
     }
+    // pagination logic
+
+    renderedPages = [];
+    for (let i = pagesStartingFrom; i <= pagesUpTo; i++) {
+        renderedPages.push(<PaginationNumber to={BASE_URL + (i !== 1 ? `/${i}` : "")} key={i} end>{i}</PaginationNumber>);
+    }
+    // console.log(typeof activePage) // DEBUG
+    // console.log(activePage !== 2 ? `/${activePage - 1}` : "") // DEBUG
+    prevButton = activePage !== 1 ? <PaginationButton to={BASE_URL + (activePage !== 2 ? `/${activePage - 1}` : "")}>Prev</PaginationButton>: null;
+    nextButton = activePage !== total_pages ? <PaginationButton to={BASE_URL + `/${activePage + 1}`}>Prev</PaginationButton>: null;
+
     return (<MainDiv sidebarShow={sidebarShow}>
             <HeaderDiv sidebarShow={sidebarShow}>
                 <HeaderLeftDiv>
@@ -129,16 +159,13 @@ export function Rooms(props) {
                     </MainTable>
                 </div>
                 <PaginationDiv>
-                    <p>Showing 10 of {rooms.rooms.length} items</p>
+                    <p>Showing {ITEMS_PER_PAGE} of {rooms.rooms.length} items</p>
                     <PaginationRightDiv>
-                        <PaginationButton>Prev</PaginationButton>
+                        {prevButton}
                             <PaginationNumberDiv>
-                                <PaginationNumber active={true}>1</PaginationNumber>
-                                <PaginationNumber>2</PaginationNumber>
-                                <PaginationNumber>3</PaginationNumber>
-                                <PaginationNumber>4</PaginationNumber>
+                                {renderedPages}
                             </PaginationNumberDiv>
-                        <PaginationButton>Next</PaginationButton>
+                        {nextButton}
                     </PaginationRightDiv>
                 </PaginationDiv>
             </MainSection>
