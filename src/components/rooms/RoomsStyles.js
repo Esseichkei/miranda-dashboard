@@ -38,8 +38,8 @@ export const PaginationRightDiv = styled.div`
     align-items: center;
 `;
 export const PaginationButton = styled(Link)`
-    color: #135846;
-    border: 1px solid #135846;
+    color: ${props => props.active === 'true' ? "#135846": "#C5C5C5"};
+    border: 1px solid ${props => props.active === 'true' ? "#135846": "#C5C5C5"};
     border-radius: 12px;
     padding: 16px 28px 14px;
     background-color: #FFFFFF;

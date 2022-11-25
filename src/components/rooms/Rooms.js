@@ -1,5 +1,5 @@
 import { HeaderDiv, HeaderLeftDiv, MainDiv, SidebarDiv, SidebarToggle, HeaderRightDiv, HeaderSearchField, HeartDiv, EnvelopeDiv, BellDiv, MessaageDiv, UserDiv, SidebarTitle, SidebarTitleIcon, SidebarNavLink, SidebarIconWrapper, SidebarUserDiv, SidebarUserAvatar, SidebarUserEmail, SidebarUserButton, SidebarBylineDiv, SidebarBylineBlack, SidebarBylineGrey, SidebarBylineGreyLast, TopRowDiv, TopRowTab, TopRowTabDiv, TopRowButton, MainTable, MainTableRow, MainTableHead, MainSection, PaginationDiv, PaginationButton, PaginationNumberDiv, PaginationNumber, PaginationRightDiv } from "./RoomsStyles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReactComponent as GridSvg } from "../../img/grid-interface-layout-icon.svg";
 import { ReactComponent as KeySvg } from "../../img/key-line-icon.svg";
 import { ReactComponent as CalendarSvg} from "../../img/schedule-calendar-icon.svg";
@@ -18,47 +18,40 @@ export function Rooms(props) {
     // itemList definitions
     const rooms = useSelector(selectRooms);
     const dispatch = useDispatch();
-    let renderedRooms;
+    const [renderedRooms, setRenderedRooms] = useState([]);
     // pagination definitions
     const { page } = useParams();
-    const totalPages = Math.max(Math.ceil(rooms.rooms.length / ITEMS_PER_PAGE), 1);
     const activePage = page === undefined ? 1 : Number(page);
+    const totalPages = Math.max(Math.ceil(rooms.items.length / ITEMS_PER_PAGE), 1);
     const pagesStartingFrom = Math.max(1, activePage - Math.floor(PAGES_SHOWN/2));
-    const pagesUpTo = Math.min(totalPages, pagesStartingFrom + PAGES_SHOWN - 1);
-    
-    let renderedPages;
-    let prevButton;
-    let nextButton;
-    // sidebar definitions
+    const pagesUpTo = Math.min(totalPages, activePage + Math.floor(PAGES_SHOWN/2));
+    // itemList useEffect()
+    useEffect(() => {
+        if (rooms.initialized !== true) {
+            dispatch(fetchRooms());
+        }
+        if (rooms.fulfilled === true) {
+            setRenderedRooms(rooms.items.slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE).map((item, id) => {
+                return <RoomsListItem selected={false} loaded={rooms.fulfilled} room={item} key={id}/>;
+            }));
+        } else {
+            setRenderedRooms(<RoomsListItem selected={false} loaded={rooms.fulfilled} room={false}/>);
+        }
+    }, [rooms, dispatch, activePage, totalPages]);
+    //sidebar and header logic
     const [sidebarShow, setSidebarShow] = useState(true);
     const toggleSidebar = () => {
         setSidebarShow(!sidebarShow);
     };
-    // LOGIC
-    // itemList logic
-    if (rooms.initialized !== true) {
-        dispatch(fetchRooms());
-    }
-    if (rooms.fulfilled === true) {
-        renderedRooms = rooms.rooms.slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE).map((item, id) => {
-            return <RoomsListItem selected={false} loaded={rooms.fulfilled} room={item} key={id}/>;
-        });
-    } else {
-        renderedRooms = <RoomsListItem selected={false} loaded={rooms.fulfilled} room={false}/>;
-    }
-    // pagination logic
+    //pagination logic: if moved outside of main render loop, it leads to jitter
+    let renderedPages = [];
+    for (let i = pagesStartingFrom; i <= pagesUpTo; i++) {
+        renderedPages.push(i);
+    };
+    //redirect if bad page param
     if (activePage <= 0 || activePage > totalPages) {
         return <Navigate to={BASE_URL} replace={false}/>;
-    }
-    renderedPages = [];
-    for (let i = pagesStartingFrom; i <= pagesUpTo; i++) {
-        renderedPages.push(<PaginationNumber to={BASE_URL + (i !== 1 ? `/${i}` : "")} key={i} end>{i}</PaginationNumber>);
-    }
-    // console.log(typeof activePage) // DEBUG
-    // console.log(activePage !== 2 ? `/${activePage - 1}` : "") // DEBUG
-    prevButton = activePage !== 1 ? <PaginationButton to={BASE_URL + (activePage !== 2 ? `/${activePage - 1}` : "")}>Prev</PaginationButton>: null;
-    nextButton = activePage !== totalPages ? <PaginationButton to={BASE_URL + `/${activePage + 1}`}>Prev</PaginationButton>: null;
-
+    };
     return (<MainDiv sidebarShow={sidebarShow}>
             <HeaderDiv sidebarShow={sidebarShow}>
                 <HeaderLeftDiv>
@@ -161,13 +154,13 @@ export function Rooms(props) {
                     </MainTable>
                 </div>
                 <PaginationDiv>
-                    <p>Showing {ITEMS_PER_PAGE} of {rooms.rooms.length} items</p>
+                    <p>Showing {ITEMS_PER_PAGE} out of {rooms.items.length} items</p>
                     <PaginationRightDiv>
-                        {prevButton}
-                            <PaginationNumberDiv>
-                                {renderedPages}
-                            </PaginationNumberDiv>
-                        {nextButton}
+                        <PaginationButton to={BASE_URL + (activePage > 2 ? `/${activePage - 1}` : "")} active={activePage !== 1 ? "true" : "false"}>Prev</PaginationButton>
+                        <PaginationNumberDiv>
+                            {renderedPages.map(i => <PaginationNumber to={BASE_URL + (i !== 1 ? `/${i}` : "")} key={i} end>{i}</PaginationNumber>)}
+                        </PaginationNumberDiv>
+                        <PaginationButton to={BASE_URL + (activePage === 1 && activePage === totalPages ? "" : `/${activePage !== totalPages ? activePage + 1 : activePage}`)} active={activePage !== totalPages ? "true" : "false"}>Next</PaginationButton>
                     </PaginationRightDiv>
                 </PaginationDiv>
             </MainSection>

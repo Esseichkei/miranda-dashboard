@@ -84,8 +84,7 @@ export const RoomsSlice = createSlice({
         fulfilled: false,
         initialized: false,
         hasError: false,
-        highestId: 50,
-        rooms: []
+        items: []
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -93,7 +92,7 @@ export const RoomsSlice = createSlice({
             // Add user to the state array
             state.fulfilled = true;
             state.hasError = false;
-            state.rooms.push(...action.payload);
+            state.items.push(...action.payload);
         });
         builder.addCase(fetchRooms.pending, (state, payload) => {
             state.initialized = true;
@@ -106,24 +105,22 @@ export const RoomsSlice = createSlice({
         });
 
         builder.addCase(fetchRoomById.fulfilled, (state, action) => {
-            state.rooms.push(action.payload);
+            state.items.push(action.payload);
         });
         builder.addCase(fetchRoomById.rejected, (state, payload) => {
             state.hasError = true;
         });
 
         builder.addCase(createRoom.fulfilled, (state, action) => {
-            state.rooms.push({"room_number":state.highestId,"id":"DELUXE-R95477","room_type":2,"facilities":"0-1-0-1-0-1-0","price":395,"availability":0});
-            state.highestId++;
+            state.items.push(action.payload);
         });
 
         builder.addCase(deleteRoom.fulfilled, (state, action) => {
-            state.rooms = state.rooms.filter(room => room.id !== action.payload);
+            state.items = state.items.filter(room => room.id !== action.payload);
         });
 
         builder.addCase(updateRoom.fulfilled, (state, action) => {
-            state.rooms = state.rooms.filter(room => room.id !== action.payload.id);
-            state.rooms.push(action.payload);
+            state.items = state.rooms.map(room => room.id === action.payload.id ? action.payload : room);
         });
     }
 });
