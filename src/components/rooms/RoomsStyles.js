@@ -368,3 +368,42 @@ export const SidebarBylineBlack = styled.p`
 export const SidebarBylineGreyLast = styled(SidebarBylineGrey)`
     margin-top: 30px;
 `;
+
+export const SectionDiv = styled.div`
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    margin: 0 0 40px;
+`;
+export const SingleItemFirstDiv = styled(SectionDiv)`
+    display: flex;
+`;
+export const LeftSideDiv = styled.div`
+    height: 100%;
+    width: 50%;
+    background-color: #FF8800;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 40px;
+`;
+export const AvatarPicture = styled.div`
+    width: 156px;
+    height: 156px;
+    background-color: #C5C5C5;
+    border-radius: 12px;
+    margin-right: 39px;
+    margin-bottom: 39px;
+    background-size: cover;
+    background-repeat: no-repeat;
+`;
+
+export const RigthSideDiv = styled.div`
+    position: relative;
+    //height: 100%; WHYYYY
+    width: 50%;
+    background-color: #00FF66;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 40px;
+`;

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
+import { AvatarPicture, LeftSideDiv, RigthSideDiv, SectionDiv, SingleItemFirstDiv } from "./RoomsStyles";
 
 export function SingleRoom (props) {
     const params = useParams();
@@ -8,6 +9,16 @@ export function SingleRoom (props) {
         setTitle(`Room #${params.id}`);
     }, [params.id, setTitle]);
     return (
-        <h1>Room #{params.id}</h1>
+        <div>
+            <SingleItemFirstDiv>
+                <LeftSideDiv>
+                    <AvatarPicture />
+                </LeftSideDiv>
+                <RigthSideDiv>nah, you!</RigthSideDiv>
+            </SingleItemFirstDiv>
+            <SectionDiv>
+                <p>whoa nelly</p>
+            </SectionDiv>
+        </div>
     );
 }

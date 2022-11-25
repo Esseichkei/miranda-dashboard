@@ -5,7 +5,7 @@ export const selectRooms = (state) => {
     return state.rooms;
 }
 
-export const fetchRooms = createAsyncThunk('rooms/fetchRooms', async (arg, ThunkAPI) => {
+export const fetchRooms = createAsyncThunk('rooms/fetchAll', async (arg, ThunkAPI) => {
     await DelayRandomly();
     // const request = await fetch(endpoint + 'rooms?request="fetchAll");
     // const data = await JSON.parse(request.data);
@@ -61,6 +61,22 @@ export const fetchRooms = createAsyncThunk('rooms/fetchRooms', async (arg, Thunk
     {"room_number":50,"id":"DELUXE-R95477","room_type":2,"facilities":"0-1-0-1-0-1-0","price":395,"availability":0}];
     return roomsData;
 });
+export const fetchRoomById = createAsyncThunk("rooms/fetchById", async (id, thunkAPI) => {
+    await DelayRandomly();
+    return {"room_number":id,"id":"DELUXE-R28443","room_type":2,"facilities":"0-1-1-0-0-1-0","price":363,"availability":1};
+});
+export const createRoom = createAsyncThunk("room/create", async (arg, thunkAPI) => {
+    await DelayRandomly();
+    return;
+});
+export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAPI) => {
+    await DelayRandomly();
+    return id;
+});
+export const updateRoom = createAsyncThunk("room/updateById", async (object, thunkAPI) => {
+    await DelayRandomly();
+    return object;
+});
 
 export const RoomsSlice = createSlice({
     name: 'rooms',
@@ -68,6 +84,7 @@ export const RoomsSlice = createSlice({
         fulfilled: false,
         initialized: false,
         hasError: false,
+        highestId: 50,
         rooms: []
     },
     reducers: {},
@@ -76,7 +93,7 @@ export const RoomsSlice = createSlice({
             // Add user to the state array
             state.fulfilled = true;
             state.hasError = false;
-            state.rooms.push(...action.payload)
+            state.rooms.push(...action.payload);
         });
         builder.addCase(fetchRooms.pending, (state, payload) => {
             state.initialized = true;
@@ -86,6 +103,27 @@ export const RoomsSlice = createSlice({
         builder.addCase(fetchRooms.rejected, (state, payload) => {
             state.fulfilled = false;
             state.hasError = true;
+        });
+
+        builder.addCase(fetchRoomById.fulfilled, (state, action) => {
+            state.rooms.push(action.payload);
+        });
+        builder.addCase(fetchRoomById.rejected, (state, payload) => {
+            state.hasError = true;
+        });
+
+        builder.addCase(createRoom.fulfilled, (state, action) => {
+            state.rooms.push({"room_number":state.highestId,"id":"DELUXE-R95477","room_type":2,"facilities":"0-1-0-1-0-1-0","price":395,"availability":0});
+            state.highestId++;
+        });
+
+        builder.addCase(deleteRoom.fulfilled, (state, action) => {
+            state.rooms = state.rooms.filter(room => room.id !== action.payload);
+        });
+
+        builder.addCase(updateRoom.fulfilled, (state, action) => {
+            state.rooms = state.rooms.filter(room => room.id !== action.payload.id);
+            state.rooms.push(action.payload);
         });
     }
 });
