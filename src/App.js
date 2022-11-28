@@ -42,14 +42,15 @@ function App() {
       }>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Dashboard/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/" element={<Page/>}>
+              <Route path="" element={<Dashboard/>} />
+              <Route path="rooms" element={<Rooms/>} />
+              <Route path="rooms/:page" element={<Rooms />} />
+              <Route path="rooms/item/:id" element={<SingleRoom/>} />
+            </Route>
             <Route path="/bookings" element={<Bookings/>} />
             <Route path="/bookings/:id" element={<BookingsSingle/>} />
-            <Route path="/rooms" element={<Rooms/>} />
-            <Route path="/rooms/item/" element={<Page/>}>
-              <Route path=":id" element={<SingleRoom/>}/>
-            </Route>
             <Route path="/rooms/:page" element={<Rooms/>} />
             <Route path="/users" element={<Users/>} />
             <Route path="/users/:id" element={<UsersSingle/>} />
