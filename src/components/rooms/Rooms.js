@@ -40,7 +40,7 @@ export function Rooms(props) {
             setRenderedRooms(<RoomsListItem selected={false} loaded={rooms.fulfilled} room={false}/>);
         }
     }, [rooms, dispatch, activePage, totalPages]);
-    //pagination logic: if moved outside of main render loop, it leads to jitter
+    //pagination logic
     const renderedPages = useMemo(() => {
         let arrayOfPages = [];
         for (let i = pagesStartingFrom; i <= pagesUpTo; i++) {
