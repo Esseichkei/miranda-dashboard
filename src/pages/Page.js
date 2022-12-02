@@ -1,20 +1,29 @@
 import { MainDiv } from "./PageStyles";
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Outlet, Navigate } from "react-router-dom";
 import { Header } from "../components/header/Header";
 import { Sidebar } from "../components/sidebar/Sidebar";
+import { AuthContext } from "../components/auth";
 
 export function Page (props) {
-    const [title, setTitle] = useState('Title')
+    const auth = useContext(AuthContext);
+    const [title, setTitle] = useState('Title');
     const [sidebarShow, setSidebarShow] = useState(true);
     const sidebarToggle = () => {
         setSidebarShow(!sidebarShow);
     }
-    return (
-        <MainDiv sidebarShow={sidebarShow}>
-            <Header sidebarShow={sidebarShow} toggleSidebar={sidebarToggle} title={title}/>
-            <Sidebar sidebarShow={sidebarShow} />
-            <Outlet context={setTitle} />
-        </MainDiv>
-    );
+    const logOut = () => {
+        auth.authDispatch({type: 'logout'});
+    }
+    if (!auth.authState.authenticated) {
+        return <Navigate to='/login'/>;
+    } else {
+        return (
+            <MainDiv sidebarShow={sidebarShow}>
+                <Header sidebarShow={sidebarShow} toggleSidebar={sidebarToggle} title={title}/>
+                <Sidebar sidebarShow={sidebarShow} logOut={logOut} />
+                <Outlet context={setTitle} />
+            </MainDiv>
+        );
+    }
 }

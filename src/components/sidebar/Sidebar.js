@@ -36,7 +36,7 @@ export function Sidebar(props) {
                 <SidebarUserAvatar />
                 <h4>Cat Cattington</h4>
                 <SidebarUserEmail>cat@catmail.com</SidebarUserEmail>
-                <SidebarUserButton>Log out</SidebarUserButton>
+                <SidebarUserButton onClick={props.logOut}>Log out</SidebarUserButton>
             </SidebarUserDiv>
             <SidebarBylineDiv>
                 <SidebarBylineBlack>Miranda Dashboard Software</SidebarBylineBlack>
