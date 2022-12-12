@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import HotelImg from "../../img/residential-apartments-icon.svg";
 
 export const SidebarDiv = styled.div`
+    z-index: 20;
     position: fixed;
     height: 100vh;
     top: 0;

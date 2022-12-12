@@ -7,6 +7,7 @@ import BellImg from "../../img/notification-bell-icon.svg";
 import MessageImg from "../../img/message-icon.svg";
 
 export const HeaderDiv = styled.div`
+    z-index: 10;
     position: fixed;
     top: 0;
     left: 0;
