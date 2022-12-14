@@ -173,23 +173,185 @@ export const DashboardGraphWidgetDiv = styled.div`
     grid-row: 2 / span 1;
     box-shadow: 0px 4px 4px #00000005;
 `;
+
 export const DashboardSliderDiv = styled.div`
     border-radius: 20px;
     background-color: #135846;
     color: #FFFFFF;
     box-shadow: 0px 4px 4px #00000005;
+    padding: 30px;
 `;
+export const DashboardSliderAbove = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 23px;
+`;
+export const DashboardSliderText = styled.div`
+    font-size: 14px;
+    font-weight: 300;
+    color: #FFFFFF;
+`;
+export const DashboardSliderNumber = styled.div`
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+`;
+export const DashboardSliderTotal = styled.div`
+    height: 16px;
+    width: 100%;
+    background-color: #FFFFFF33;
+    border-radius: 8px;
+`;
+export const DashboardSliderSection = styled.div`
+    height: 100%;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    width: 60%;
+`;
+
 export const DashboardAnnualDiv = styled.div`
     grid-column: 3 / span 2;
     grid-row: 4 / span 1;
     border-radius: 20px;
-    background-color: #123456;
+    background-color: #FFFFFF;
     box-shadow: 0px 4px 4px #00000005;
+    padding: 30px;
 `;
+export const DashboardAnnualRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+`;
+export const DashboardAnnualItem = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+`;
+export const DashboardAnnualNumber = styled.div`
+    font-weight: 600;
+    font-size: 28px;
+    color: #3939393;
+    margin-bottom: 10px;
+`;
+export const DashboardAnnualLabel = styled.div`
+    color: #6E6E6E;
+`;
+export const DashboardAnnualAd = styled.div`
+    color: #135846;
+    font-size: 20px;
+`;
+export const DashboardAnnualAdText = styled.div`
+    font-size: 12px;
+    font-weight: 300;
+    color: #6E6E6E;
+`;
+export const DashboardAnnualArrow = styled(Link)`
+    svg {
+        width: 24px;
+        height: 16px;
+        & path {
+            stroke: #135846;
+            fill: #135846;
+        }
+    }
+`;
+
 export const DashboardReviewDiv = styled.div`
     grid-row: 5 / span 1;
     grid-column: 1 / span 4;
     border-radius: 20px;
-    background-color: #654321;
+    background-color: #FFFFFF;
     box-shadow: 0px 4px 4px #00000005;
+    padding: 30px;
+`;
+export const DashboardReviewTitle = styled.div`
+    font-size: 20px;
+    color: #393939;
+    margin-bottom: 30px;
+`;
+export const DashboardReviewMainArea = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+export const DashboardReviewItem = styled.div`
+    border: 1px solid #EBEBEB;
+    margin: 5px;
+    width: 430px;
+    height: 275px;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    ${props => props.selected !== undefined ? "box-shadow: 0px 16px 30px #00000014;" : ""}
+`;
+export const DashboardReviewItemText = styled.div`
+    color: #4E4E4E;
+`;
+export const DashboardReviewItemBelow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+export const DashboardReviewItemUserDiv = styled.div`
+    display: flex;
+    align-items: center;
+`;
+export const DashboardReviewItemAvatar = styled.div`
+    width: 56px;
+    height: 56px;
+    background-color: #C5C5C5;
+    background-size: cover;
+    ${props => props.avatarSource !== undefined ? "background-image: url(" + props.avatarSource + ");": ""}
+    border-radius: 8px;
+    margin-right: 20px;
+`;
+export const DashboardReviewItemUsername = styled.div`
+    color: #262626;
+    font-weight: 600;
+    margin-bottom: 2px;
+`;
+export const DashboardReviewItemWhen = styled.div`
+    color: #799283;
+    font-size: 14px;
+`;
+export const DashboardReviewItemButtonDiv = styled.div`
+    display: flex;
+`;
+export const DashboardReviewItemButton = styled.div`
+    margin: 8px;
+    svg {
+        width: 24px;
+        height: 24px;
+        & path {
+            stroke: ${props => props.color !== undefined ? props.color : "#000000"};
+            fill: ${props => props.color !== undefined ? props.color : "#000000"};
+        }
+    }
+`;
+export const DashboardReviewAll = styled.div`
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    right: -65px;
+    top: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #135846;
+    svg {
+        width: 24px;
+        height: 16px;
+        & path {
+            stroke: #FFFFFF;
+            fill: #FFFFFF;
+        }
+    }
 `;

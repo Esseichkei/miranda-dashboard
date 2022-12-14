@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-import { DashboardAnnualDiv, DashboardCalendarDaysDiv, DashboardCalendarListDiv, DashboardCalendarViewMore, DashboardCalendarWidgetDiv, DashboardGraphWidgetDiv, DashboardMain, DashboardReviewDiv, DashboardSliderDiv } from "./DashboardStyles";
+import { DashboardCalendarDaysDiv, DashboardCalendarListDiv, DashboardCalendarViewMore, DashboardCalendarWidgetDiv, DashboardGraphWidgetDiv, DashboardMain } from "./DashboardStyles";
 import { ReactComponent as BedSvg } from "../../img/bed-icon.svg";
 import { ReactComponent as CalendarSvg } from "../../img/schedule-calendar-icon.svg";
 import { ReactComponent as InputSvg } from "../../img/log-in.svg";
@@ -9,6 +9,9 @@ import { DashboardSmallWidget } from "./DashboardSmallWidget";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { DashboardCalendarItem } from "./DashboardCalendarItem";
+import { DashboardSliderWidget } from "./DashboardSliderWidget";
+import { DashboardAnnualReport } from "./DashboardAnnualReport";
+import { DashboardReviewWidget } from "./DashboardReviewWidget";
 
 export function Dashboard (props) {
     const setTitle = useOutletContext();
@@ -54,10 +57,10 @@ export function Dashboard (props) {
             <DashboardGraphWidgetDiv>
 
             </DashboardGraphWidgetDiv>
-            <DashboardSliderDiv />
-            <DashboardSliderDiv />
-            <DashboardAnnualDiv />
-            <DashboardReviewDiv />
+            <DashboardSliderWidget />
+            <DashboardSliderWidget />
+            <DashboardAnnualReport />
+            <DashboardReviewWidget />
         </DashboardMain>
     );
 }

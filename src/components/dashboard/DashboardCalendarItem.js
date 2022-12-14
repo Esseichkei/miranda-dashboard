@@ -1,7 +1,7 @@
 import { DashboardCalendarListItem, DashboardCalendarListItemDetails, DashboardCalendarListItemLeft, DashboardCalendarListItemPhoto, DashboardCalendarListItemDays, DashboardCalendarListItemAvatar, DashboardCalendarListItemUsername, DashboardCalendarListItemWhen } from "./DashboardStyles"
 
 export function DashboardCalendarItem(props) {
-    return <DashboardCalendarListItem>
+    return (<DashboardCalendarListItem>
         <DashboardCalendarListItemLeft>
             <DashboardCalendarListItemPhoto />
             <div>
@@ -20,5 +20,5 @@ export function DashboardCalendarItem(props) {
         <DashboardCalendarListItemDays>
             11
         </DashboardCalendarListItemDays>
-    </DashboardCalendarListItem>
+    </DashboardCalendarListItem>);
 }
