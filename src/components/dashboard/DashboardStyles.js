@@ -168,10 +168,31 @@ export const DashboardCalendarViewMore = styled(Link)`
 
 export const DashboardGraphWidgetDiv = styled.div`
     border-radius: 20px;
-    background-color: #003300;
+    background-color: #FFFFFF;
     grid-column: 3 / span 2;
     grid-row: 2 / span 1;
     box-shadow: 0px 4px 4px #00000005;
+    padding: 30px;
+`;
+export const DashboardGraphAbove = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+`;
+export const DashboardGraphTitle = styled.div`
+    color: #393939;
+    font-size: 20px;
+`;
+export const DashboardGraphUpperRow = styled.div`
+    display: flex;
+`;
+export const DashboardGraphUpperButton = styled.div`
+    color: ${props => props.active !== undefined ? "#135846" : "#6E6E6E"};
+    padding: 12px;
+    border-bottom: ${props => props.active !== undefined ? "2px solid #135846" : "1px solid #6E6E6E"};
+`;
+export const DashboardGraphGraphDiv = styled.div`
+    // TBD
 `;
 
 export const DashboardSliderDiv = styled.div`
