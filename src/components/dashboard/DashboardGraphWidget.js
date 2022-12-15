@@ -20,7 +20,6 @@ export function DashboardGraphWidget(props) {
                 </DashboardGraphUpperRow>
                 <DashboardGraphGraphDiv />
             </DashboardGraphAbove>
-
         </DashboardGraphWidgetDiv>
     );
 }

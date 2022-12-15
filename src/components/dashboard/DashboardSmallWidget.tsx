@@ -1,6 +1,7 @@
-import { DashboardSmallWidgetDiv, DashboardSmallWidgetIconDiv, DashboardSmallWidgetTextBig, DashboardSmallWidgetTextSmall } from "./DashboardStyles";
+import { DashboardSmallWidgetTextBig, DashboardSmallWidgetTextSmall } from "./DashboardStyles";
+import { DashboardSmallWidgetDiv, DashboardSmallWidgetIconDiv } from "./DashboardSmallWidgetStyles";
 
-export function DashboardSmallWidget(props) {
+export function DashboardSmallWidget(props: any) {
     return (
         <DashboardSmallWidgetDiv active={props.active}>
             <DashboardSmallWidgetIconDiv active={props.active}>
