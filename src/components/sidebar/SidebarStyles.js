@@ -108,6 +108,11 @@ export const SidebarUserButton = styled.button`
     margin: 16px 0;
     font-size: 14px;
     font-weight: 600;
+    transition: all 0.4s;
+    &:hover {
+        background-color: #135846;
+        color: #FFFFFF;
+    }
 `;
 export const SidebarBylineDiv = styled.div`
     margin: 20px 20px 20px 56px;

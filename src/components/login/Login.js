@@ -8,22 +8,39 @@ export function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [failed, setFailed] = useState(false);
+    const [loginEnabled, setLoginEnabled] = useState(true);
     const changeEmail = (ev) => {
         setEmail(ev.target.value);
     };
     const changePass = (ev) => {
         setPassword(ev.target.value);
     }
-    const tryLoggingIn = (ev) => {
+    const tryLoggingIn = async (ev) => {
         ev.preventDefault();
-        if (email !== "cat@catmail.com" || password !== "meow") {
-            setEmail('');
-            setPassword('');
-            setFailed(true);
+        if (!loginEnabled) {
+            return
         }
-        else {
+        setLoginEnabled(false);
+        const response = await fetch(process.env.REACT_APP_API_URI + 'login', {
+            method: 'POST',
+            headers: {
+                'ContentType': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                'email': email,
+                'password': password
+            })
+        });
+        console.log(response);
+        const data = await response.json();
+        if (data.token !== undefined) {
+            localStorage.setItem('APIToken', data.token)
             auth.authDispatch({type: 'login'});
         }
+        else {
+            setFailed(true);
+        }
+        setLoginEnabled(true);
     }
     useEffect(() => {
         const timeoutId = setTimeout(() => {
