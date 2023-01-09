@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
-import { AvatarPicture, LeftSideDiv, RigthSideDiv, SectionDiv, SingleItemFirstDiv } from "./RoomsStyles";
+import { AvatarDiv, AvatarDivLeft, AvatarPicture, ItemDetails, ItemDetailsButton, ItemDetailsButtonCluster, ItemDetailsButtonLabel, ItemDetailsButtonLabelled, ItemSubtitle, ItemTitle, LeftSideDiv, RigthSideDiv, SectionDiv, SingleItemFirstDiv } from "./RoomsStyles";
+import { ReactComponent as PhoneSvg } from "../../img/phone-call-icon.svg";
+import { ReactComponent as ConversationSvg } from "../../img/speech-bubble-icon.svg";
 
 export function SingleRoom (props) {
     const params = useParams();
@@ -12,7 +14,31 @@ export function SingleRoom (props) {
         <div>
             <SingleItemFirstDiv>
                 <LeftSideDiv>
-                    <AvatarPicture />
+                    <AvatarDiv>
+                        <AvatarDivLeft>
+                            <AvatarPicture />
+                            <ItemDetails>
+                                <ItemTitle>
+                                    Item Title
+                                </ItemTitle>
+                                <ItemSubtitle>
+                                    ID: 12345678
+                                </ItemSubtitle>
+                                <ItemDetailsButtonCluster>
+                                    <ItemDetailsButton>
+                                        <PhoneSvg />
+                                    </ItemDetailsButton>
+                                    <ItemDetailsButtonLabelled>
+                                        <ConversationSvg />
+                                        <ItemDetailsButtonLabel>
+                                            Send Message
+                                        </ItemDetailsButtonLabel>
+                                    </ItemDetailsButtonLabelled>
+                                </ItemDetailsButtonCluster>
+                            </ItemDetails>
+                        </AvatarDivLeft>
+                        
+                    </AvatarDiv>
                 </LeftSideDiv>
                 <RigthSideDiv>nah, you!</RigthSideDiv>
             </SingleItemFirstDiv>

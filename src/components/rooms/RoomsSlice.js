@@ -50,12 +50,12 @@ export const RoomsSlice = createSlice({
             state.hasError = false;
             state.items.push(...action.payload);
         });
-        builder.addCase(fetchRooms.pending, (state, payload) => {
+        builder.addCase(fetchRooms.pending, (state, action) => {
             state.initialized = true;
             state.fulfilled = false;
             state.hasError = false;
         });
-        builder.addCase(fetchRooms.rejected, (state, payload) => {
+        builder.addCase(fetchRooms.rejected, (state, action) => {
             state.fulfilled = false;
             state.hasError = true;
         });
@@ -63,7 +63,7 @@ export const RoomsSlice = createSlice({
         builder.addCase(fetchRoomById.fulfilled, (state, action) => {
             state.items.push(action.payload);
         });
-        builder.addCase(fetchRoomById.rejected, (state, payload) => {
+        builder.addCase(fetchRoomById.rejected, (state, action) => {
             state.hasError = true;
         });
 

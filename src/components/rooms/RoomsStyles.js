@@ -385,17 +385,78 @@ export const LeftSideDiv = styled.div`
     border-bottom-left-radius: 20px;
     padding: 40px;
 `;
+export const AvatarDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+`;
+export const AvatarDivLeft = styled.div`
+    display: flex;
+    margin-bottom: 39px;
+`;
 export const AvatarPicture = styled.div`
     width: 156px;
     height: 156px;
     background-color: #C5C5C5;
     border-radius: 12px;
     margin-right: 39px;
-    margin-bottom: 39px;
     background-size: cover;
     background-repeat: no-repeat;
 `;
-
+export const ItemDetails = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+`;
+export const ItemTitle = styled.div`
+    font-size: 30px;
+    color: #212121;
+`;
+export const ItemSubtitle = styled.div`
+    font-size: 14px;
+    color: #799283;
+`
+export const ItemDetailsButtonCluster = styled.div`
+    display: flex;
+`;
+export const ItemDetailsButton = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #E8F2EF;
+    background-color: #FFFFFF;
+    color: #135846;
+    transition: color 0.4s, border-color 0.4s, background-color 0.4s;
+    svg {
+        height: 22px;
+        width: 22px;
+        & path {
+            stroke: #135846;
+            fill: #135846;
+            transition: stroke 0.4s, fill 0.4s;
+        }
+    }
+    &:hover {
+        border-color: #135846;
+        background-color: #135846;
+        color: #FFFFFF;
+        svg {
+            & path {
+                stroke: #FFFFFF;
+                fill: #FFFFFF;
+            }
+        }
+    }
+`;
+export const ItemDetailsButtonLabelled = styled(ItemDetailsButton)`
+    margin-left: 16px;
+`;
+export const ItemDetailsButtonLabel = styled.div`
+    margin-left: 20px;
+`;
 export const RigthSideDiv = styled.div`
     position: relative;
     //height: 100%; WHYYYY
