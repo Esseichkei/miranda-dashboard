@@ -33,6 +33,7 @@ export const PaginationRightDiv = styled.div`
 export const PaginationButton = styled(Link)`
     color: ${props => props.active === 'true' ? "#135846": "#C5C5C5"};
     border: 1px solid ${props => props.active === 'true' ? "#135846": "#C5C5C5"};
+    cursor: ${props => props.active === 'true' ? "pointer": "default"};
     border-radius: 12px;
     padding: 16px 28px 14px;
     background-color: #FFFFFF;
@@ -54,6 +55,7 @@ export const PaginationNumber = styled(NavLink)`
     padding: 16px 24px 14px;
     border-radius: 12px;
     &.active {
+        cursor: default;
         color: #FFFFFF;
         background-color: #135846;
     }
