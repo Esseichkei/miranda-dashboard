@@ -468,3 +468,59 @@ export const RigthSideDiv = styled.div`
     background-repeat: no-repeat;
     padding: 40px;
 `;
+export const ItemDotsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 12px;
+    height: 30px;
+    padding: 3px;
+
+`;
+export const ItemDot = styled.div`
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #6E6E6E;
+`;
+export const DatesDiv = styled.div``;
+export const DateItem = styled.div`
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    padding-right: 10px;
+`;
+export const DateItemTitle = styled.div`
+    font-size: 14px;
+    color: #6E6E6E;
+`;
+export const DateItemText = styled.div`
+    color: #212121;
+`;
+export const Separator = styled.div`
+    height: 4px;
+    background-color: #C4C4C4;
+    margin: 40px 0 40px;
+    border-radius: 2px;
+`;
+export const InfoDiv = styled.div``;
+export const InfoDivRow = styled.div`
+    margin-bottom: 30px;
+`;
+export const InfoDivRowItem = styled(DateItem)``;
+export const InfoItemTitle = styled(DateItemTitle)``;
+export const InfoItemText = styled(DateItemText)`
+    font-size: 24px;
+`;
+export const InfoItemTextSmall = styled.span`
+    margin-left: 5px;
+    font-size: 14px;
+    color: #799283;
+`;
+export const InfoMainText = styled.div`
+    font-size: 14px;
+    color: #363636;
+    margin: 30px 0;
+`;
+export const ClusterDiv = styled.div``;
