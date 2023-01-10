@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
-import { AvatarDiv, AvatarDivLeft, AvatarPicture,
+import { AvatarDiv, AvatarDivLeft,
     ItemDetails, ItemDetailsButton, ItemDetailsButtonCluster,
     ItemDetailsButtonLabel, ItemDetailsButtonLabelled,
     ItemDotsDiv, ItemDot, ItemSubtitle, ItemTitle,
-    LeftSideDiv, RigthSideDiv, SectionDiv,
+    LeftSideDiv, RigthSideDiv,
     SingleItemFirstDiv, DatesDiv, Separator,
     InfoDiv, ClusterDiv, DateItem, DateItemTitle, DateItemText, InfoDivRow, InfoDivRowItem, InfoItemTitle, InfoItemText, InfoItemTextSmall, InfoMainText } from "./RoomsStyles";
-import { ReactComponent as PhoneSvg } from "../../img/phone-call-icon.svg";
-import { ReactComponent as ConversationSvg } from "../../img/speech-bubble-icon.svg";
+import { ReactComponent as DeleteSvg } from "../../img/delete-icon.svg";
+import { ReactComponent as EditSvg } from "../../img/edit-icon.svg";
 
 export function SingleRoom (props) {
     const params = useParams();
@@ -22,22 +22,21 @@ export function SingleRoom (props) {
                 <LeftSideDiv>
                     <AvatarDiv>
                         <AvatarDivLeft>
-                            <AvatarPicture />
                             <ItemDetails>
                                 <ItemTitle>
-                                    Item Title
+                                    Room Type
                                 </ItemTitle>
                                 <ItemSubtitle>
                                     ID: 12345678
                                 </ItemSubtitle>
                                 <ItemDetailsButtonCluster>
                                     <ItemDetailsButton>
-                                        <PhoneSvg />
+                                        <DeleteSvg />
                                     </ItemDetailsButton>
                                     <ItemDetailsButtonLabelled>
-                                        <ConversationSvg />
+                                        <EditSvg />
                                         <ItemDetailsButtonLabel>
-                                            Send Message
+                                            Edit Fields
                                         </ItemDetailsButtonLabel>
                                     </ItemDetailsButtonLabelled>
                                 </ItemDetailsButtonCluster>
@@ -52,32 +51,24 @@ export function SingleRoom (props) {
                     <DatesDiv>
                         <DateItem>
                             <DateItemTitle>
-                                Check In
+                                State
                             </DateItemTitle>
                             <DateItemText>
-                                October 30th, 2020 | 09:11 AM
+                                Available
                             </DateItemText>
                         </DateItem>
                         <DateItem>
                             <DateItemTitle>
-                                Check Out
+                                Cancellation
                             </DateItemTitle>
                             <DateItemText>
-                                November 2nd, 2020
+                                One week's notice
                             </DateItemText>
                         </DateItem>
                     </DatesDiv>
                     <Separator />
                     <InfoDiv>
                         <InfoDivRow>
-                            <InfoDivRowItem>
-                                <InfoItemTitle>
-                                    Room Info
-                                </InfoItemTitle>
-                                <InfoItemText>
-                                    Deluxe Z - 002424
-                                </InfoItemText>
-                            </InfoDivRowItem>
                             <InfoDivRowItem>
                                 <InfoItemTitle>
                                     Price
@@ -89,24 +80,33 @@ export function SingleRoom (props) {
                                     </InfoItemTextSmall>
                                 </InfoItemText>
                             </InfoDivRowItem>
+                            <InfoDivRowItem>
+                                <InfoItemTitle>
+                                    Discount
+                                </InfoItemTitle>
+                                <InfoItemText>
+                                    10
+                                    <InfoItemTextSmall>
+                                        %
+                                    </InfoItemTextSmall>
+                                </InfoItemText>
+                            </InfoDivRowItem>
                         </InfoDivRow>
                         <InfoMainText>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
                         </InfoMainText>
+                    </InfoDiv>
+                    <ClusterDiv>
                         <InfoItemTitle>
                             Facilities
                         </InfoItemTitle>
-                        
-                    </InfoDiv>
-                    <ClusterDiv>
-
+                        <InfoMainText>
+                            Some things surely.
+                        </InfoMainText>
                     </ClusterDiv>
                 </LeftSideDiv>
                 <RigthSideDiv>nah, you!</RigthSideDiv>
             </SingleItemFirstDiv>
-            <SectionDiv>
-                <p>whoa nelly</p>
-            </SectionDiv>
         </div>
     );
 }

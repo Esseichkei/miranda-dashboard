@@ -171,7 +171,6 @@ export const SingleItemFirstDiv = styled(SectionDiv)`
 export const LeftSideDiv = styled.div`
     height: 100%;
     width: 50%;
-    background-color: #FF8800;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     padding: 40px;
@@ -203,12 +202,15 @@ export const ItemDetails = styled.div`
 export const ItemTitle = styled.div`
     font-size: 30px;
     color: #212121;
+    margin: 10px 0;
 `;
 export const ItemSubtitle = styled.div`
     font-size: 14px;
     color: #799283;
+    margin: 5px 0;
 `
 export const ItemDetailsButtonCluster = styled.div`
+    margin: 10px 0;
     display: flex;
 `;
 export const ItemDetailsButton = styled.div`
