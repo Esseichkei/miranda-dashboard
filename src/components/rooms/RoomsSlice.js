@@ -6,11 +6,10 @@ export const selectRooms = (state) => {
 }
 
 export const fetchRooms = createAsyncThunk('rooms/fetchAll', async (arg, ThunkAPI) => {
-    await DelayRandomly();
     const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/x-www-form-urlenconded',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
         }
     });

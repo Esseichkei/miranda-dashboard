@@ -24,15 +24,19 @@ export function Login(props) {
         const response = await fetch(process.env.REACT_APP_API_URI + 'login', {
             method: 'POST',
             headers: {
-                'ContentType': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json' 
             },
-            body: new URLSearchParams({
-                'email': email,
-                'password': password
+            body: JSON.stringify({
+                email: email,
+                password: password
             })
         });
-        console.log(response);
         const data = await response.json();
+        console.log(JSON.stringify({
+            email: email,
+            password: password
+        }));
+        console.log(data);
         if (data.token !== undefined) {
             localStorage.setItem('APIToken', data.token)
             auth.authDispatch({type: 'login'});
