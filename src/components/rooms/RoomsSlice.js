@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { DelayRandomly } from "../../helpers";
 
 export const selectRooms = (state) => {
     return state.rooms;
@@ -17,20 +16,52 @@ export const fetchRooms = createAsyncThunk('rooms/fetchAll', async (arg, ThunkAP
     return data;
 });
 export const fetchRoomById = createAsyncThunk("rooms/fetchById", async (id, thunkAPI) => {
-    await DelayRandomly();
-    return {"room_number":id,"id":"DELUXE-R28443","room_type":2,"facilities":"0-1-1-0-0-1-0","price":363,"availability":1};
+    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
+        },
+        body: JSON.stringify({id: id})
+    });
+    const data = await request.json();
+    return data;
 });
-export const createRoom = createAsyncThunk("room/create", async (arg, thunkAPI) => {
-    await DelayRandomly();
-    return;
+export const createRoom = createAsyncThunk("room/create", async (object, thunkAPI) => {
+    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
+        },
+        body: JSON.stringify({object})
+    });
+    const data = await request.json();
+    return data;
 });
 export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAPI) => {
-    await DelayRandomly();
-    return id;
+    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
+        },
+        body: JSON.stringify({id: id})
+    });
+    const data = await request.json();
+    return data;
 });
 export const updateRoom = createAsyncThunk("room/updateById", async (object, thunkAPI) => {
-    await DelayRandomly();
-    return object;
+    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
+        },
+        body: JSON.stringify({object})
+    });
+    const data = await request.json();
+    return data;
 });
 
 export const RoomsSlice = createSlice({
