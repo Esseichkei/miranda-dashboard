@@ -15,20 +15,19 @@ export const fetchRooms = createAsyncThunk('rooms/fetchAll', async (arg, ThunkAP
     const data = await request.json();
     return data;
 });
-export const fetchRoomById = createAsyncThunk("rooms/fetchById", async (id, thunkAPI) => {
-    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+export const fetchRoomById = createAsyncThunk("rooms/fetchById/", async (id, thunkAPI) => {
+    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms/'+ id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
-        },
-        body: JSON.stringify({id: id})
+        }
     });
     const data = await request.json();
     return data;
 });
 export const createRoom = createAsyncThunk("room/create", async (object, thunkAPI) => {
-    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+    await fetch(process.env.REACT_APP_API_URI + 'rooms', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -39,7 +38,7 @@ export const createRoom = createAsyncThunk("room/create", async (object, thunkAP
     return object;
 });
 export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAPI) => {
-    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+    await fetch(process.env.REACT_APP_API_URI + 'rooms', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -50,7 +49,7 @@ export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAP
     return id;
 });
 export const updateRoom = createAsyncThunk("room/updateById", async (object, thunkAPI) => {
-    const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
+    await fetch(process.env.REACT_APP_API_URI + 'rooms', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -76,7 +75,7 @@ export const RoomsSlice = createSlice({
             // Add user to the state array
             state.fulfilled = true;
             state.hasError = false;
-            state.items.push(action.payload);
+            state.items = action.payload;
         });
         builder.addCase(fetchRooms.pending, (state, action) => {
             state.initialized = true;
