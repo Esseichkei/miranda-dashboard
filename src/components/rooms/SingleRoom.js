@@ -9,13 +9,34 @@ import { AvatarDiv, AvatarDivLeft,
     InfoDiv, ClusterDiv, DateItem, DateItemTitle, DateItemText, InfoDivRow, InfoDivRowItem, InfoItemTitle, InfoItemText, InfoItemTextSmall, InfoMainText } from "./RoomsStyles";
 import { ReactComponent as DeleteSvg } from "../../img/delete-icon.svg";
 import { ReactComponent as EditSvg } from "../../img/edit-icon.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRoomById, selectRooms } from "./RoomsSlice";
+
+const roomTypes = [
+    'Single Bed Room',
+    'Double Bed Room',
+    'Honey Moon Suite',
+    'Family Room',
+    'Presidential Suite'
+]
+const offer = [
+    'Unavailable',
+    'Available'
+]
 
 export function SingleRoom (props) {
+    const dispatch = useDispatch();
     const params = useParams();
     const setTitle = useOutletContext();
+    const rooms = useSelector(selectRooms);
     useEffect(() => {
         setTitle(`Room #${params.id}`);
     }, [params.id, setTitle]);
+    useEffect(() => {
+        if (rooms.singleItem === null || rooms.singleItem === undefined) {
+            dispatch(fetchRoomById(params.id));
+        }
+    }, [rooms, params.id, dispatch]);
     return (
         <div>
             <SingleItemFirstDiv>
@@ -24,10 +45,10 @@ export function SingleRoom (props) {
                         <AvatarDivLeft>
                             <ItemDetails>
                                 <ItemTitle>
-                                    Room Type
+                                    {rooms.singleItem ? roomTypes[rooms.singleItem.type] : 'Loading Room'}
                                 </ItemTitle>
                                 <ItemSubtitle>
-                                    ID: 12345678
+                                    ID: {rooms.singleItem ? rooms.singleItem.id : '12345678'}
                                 </ItemSubtitle>
                                 <ItemDetailsButtonCluster>
                                     <ItemDetailsButton>
@@ -54,7 +75,7 @@ export function SingleRoom (props) {
                                 State
                             </DateItemTitle>
                             <DateItemText>
-                                Available
+                                {rooms.singleItem ? offer[rooms.singleItem.offer] : 'Not loaded'}
                             </DateItemText>
                         </DateItem>
                         <DateItem>
@@ -62,7 +83,7 @@ export function SingleRoom (props) {
                                 Cancellation
                             </DateItemTitle>
                             <DateItemText>
-                                One week's notice
+                                {rooms.singleItem ? rooms.singleItem.cancellation : 'Not loaded'}
                             </DateItemText>
                         </DateItem>
                     </DatesDiv>
@@ -74,7 +95,7 @@ export function SingleRoom (props) {
                                     Price
                                 </InfoItemTitle>
                                 <InfoItemText>
-                                    $145
+                                    ${rooms.singleItem ? rooms.singleItem.price : '--'}
                                     <InfoItemTextSmall>
                                         /night
                                     </InfoItemTextSmall>
@@ -85,7 +106,7 @@ export function SingleRoom (props) {
                                     Discount
                                 </InfoItemTitle>
                                 <InfoItemText>
-                                    10
+                                    {rooms.singleItem ? rooms.singleItem.discount : '--'}
                                     <InfoItemTextSmall>
                                         %
                                     </InfoItemTextSmall>
@@ -93,7 +114,7 @@ export function SingleRoom (props) {
                             </InfoDivRowItem>
                         </InfoDivRow>
                         <InfoMainText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                            {rooms.singleItem ? rooms.singleItem.description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}
                         </InfoMainText>
                     </InfoDiv>
                     <ClusterDiv>
@@ -101,7 +122,7 @@ export function SingleRoom (props) {
                             Facilities
                         </InfoItemTitle>
                         <InfoMainText>
-                            Some things surely.
+                            {rooms.singleItem ? rooms.singleItem.facilities : 'Not applicable'}
                         </InfoMainText>
                     </ClusterDiv>
                 </LeftSideDiv>
