@@ -36,8 +36,7 @@ export const createRoom = createAsyncThunk("room/create", async (object, thunkAP
         },
         body: JSON.stringify({object})
     });
-    const data = await request.json();
-    return data;
+    return object;
 });
 export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAPI) => {
     const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
@@ -48,8 +47,7 @@ export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAP
         },
         body: JSON.stringify({id: id})
     });
-    const data = await request.json();
-    return data;
+    return id;
 });
 export const updateRoom = createAsyncThunk("room/updateById", async (object, thunkAPI) => {
     const request = await fetch(process.env.REACT_APP_API_URI + 'rooms', {
@@ -60,8 +58,7 @@ export const updateRoom = createAsyncThunk("room/updateById", async (object, thu
         },
         body: JSON.stringify({object})
     });
-    const data = await request.json();
-    return data;
+    return object;
 });
 
 export const RoomsSlice = createSlice({
@@ -70,7 +67,8 @@ export const RoomsSlice = createSlice({
         fulfilled: false,
         initialized: false,
         hasError: false,
-        items: []
+        items: [],
+        singleItem: null
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -78,7 +76,7 @@ export const RoomsSlice = createSlice({
             // Add user to the state array
             state.fulfilled = true;
             state.hasError = false;
-            state.items.push(...action.payload);
+            state.items.push(action.payload);
         });
         builder.addCase(fetchRooms.pending, (state, action) => {
             state.initialized = true;
@@ -91,7 +89,11 @@ export const RoomsSlice = createSlice({
         });
 
         builder.addCase(fetchRoomById.fulfilled, (state, action) => {
-            state.items.push(action.payload);
+            state.fulfilled = true;
+            state.singleItem = action.payload;
+        });
+        builder.addCase(fetchRoomById.pending, (state, action) => {
+            state.fulfilled = false;
         });
         builder.addCase(fetchRoomById.rejected, (state, action) => {
             state.hasError = true;
