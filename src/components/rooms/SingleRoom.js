@@ -122,7 +122,7 @@ export function SingleRoom (props) {
                             Facilities
                         </InfoItemTitle>
                         <InfoMainText>
-                            {rooms.singleItem ? rooms.singleItem.facilities : 'Not applicable'}
+                            {rooms.singleItem ? rooms.singleItem.amenities : 'Not applicable'}
                         </InfoMainText>
                     </ClusterDiv>
                 </LeftSideDiv>
