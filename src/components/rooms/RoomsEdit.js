@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createRoom, updateRoom } from "./RoomsSlice";
 import { ModalBackground, ModalButton, ModalDiv, ModalMainTitle, ModalRow, ModalRowItemGrow, ModalSelect, ModalTextarea, ModalTextField, ModalTitle } from "./RoomsStyles";
 import { roomOffer, roomTypes } from "./SingleRoom";
 
-
-
 export function RoomsEdit(props) {
-    const [object, setObject] = useState({
+    const [object, setObject] = useState(props.room || {
         id: 0,
         type: 0,
         offer: 0,
@@ -16,7 +16,7 @@ export function RoomsEdit(props) {
         cancellation: "",
         photos: ""
     });
-
+    const dispatch = useDispatch();
     const changeId = (ev) => {
         setObject({...object, id: ev.target.value});
     }
@@ -45,9 +45,17 @@ export function RoomsEdit(props) {
         setObject({...object, photos: ev.target.value});
     }
     const tryLoggingData = async () => {
-        console.log(object);
+        if (props.operationInProgress)
+            return; // ignore click if previous operation isn't over
+        if (props.operation === 'update') {
+            dispatch(updateRoom(object));
+        } else if (props.operation === 'create') {
+            dispatch(createRoom(object));
+        }
     }
     const closeModal = (ev) => {
+        if (props.operationInProgress)
+            return; // if the submit operation isn't over, don't allow user to close modal
         if (ev.target === ev.currentTarget)
             props.setEdit(false);
     }

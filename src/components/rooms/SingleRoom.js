@@ -44,7 +44,9 @@ export function SingleRoom (props) {
     }, [rooms, params.id, dispatch]);
     return (
         <div>
-            {edit ? <RoomsEdit setEdit={setEdit}/>: null}
+            {edit ? <RoomsEdit setEdit={setEdit}
+                operationInProgress={!rooms.fulfilled} room={rooms.singleItem}
+                operation="update"/>: null}
             <SingleItemFirstDiv>
                 <LeftSideDiv>
                     <AvatarDiv>

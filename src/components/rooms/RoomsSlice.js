@@ -33,8 +33,9 @@ export const createRoom = createAsyncThunk("room/create", async (object, thunkAP
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
         },
-        body: JSON.stringify({object})
+        body: JSON.stringify(object)
     });
+    thunkAPI.dispatch(fetchRooms());
     return object;
 });
 export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAPI) => {
@@ -46,6 +47,8 @@ export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAP
         },
         body: JSON.stringify({id: id})
     });
+    thunkAPI.dispatch(fetchRooms());
+    thunkAPI.dispatch(fetchRoomById(id))
     return id;
 });
 export const updateRoom = createAsyncThunk("room/updateById", async (object, thunkAPI) => {
@@ -55,8 +58,10 @@ export const updateRoom = createAsyncThunk("room/updateById", async (object, thu
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('APIToken')
         },
-        body: JSON.stringify({object})
+        body: JSON.stringify(object)
     });
+    thunkAPI.dispatch(fetchRooms());
+    thunkAPI.dispatch(fetchRoomById(object.id))
     return object;
 });
 
@@ -100,14 +105,24 @@ export const RoomsSlice = createSlice({
 
         builder.addCase(createRoom.fulfilled, (state, action) => {
             state.items.push(action.payload);
+            state.fulfilled = true;
+        });
+        builder.addCase(createRoom.pending, (state, action) => {
+            state.fulfilled = false;
         });
 
         builder.addCase(deleteRoom.fulfilled, (state, action) => {
-            state.items = state.items.filter(room => room.id !== action.payload);
+            state.fulfilled = true;
+        });
+        builder.addCase(deleteRoom.pending, (state, action) => {
+            state.fulfilled = false;
         });
 
         builder.addCase(updateRoom.fulfilled, (state, action) => {
-            state.items = state.rooms.map(room => room.id === action.payload.id ? action.payload : room);
+            state.fulfilled = true;
+        });
+        builder.addCase(updateRoom.pending, (state, action) => {
+            state.fulfilled = false;
         });
     }
 });
