@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { AvatarDiv, AvatarDivLeft,
     ItemDetails, ItemDetailsButton, ItemDetailsButtonCluster,
@@ -30,6 +30,10 @@ export function SingleRoom (props) {
     const params = useParams();
     const setTitle = useOutletContext();
     const rooms = useSelector(selectRooms);
+    const [edit, setEdit] = useState(false)
+    const openModal = () => {
+        setEdit(true);
+    }
     useEffect(() => {
         setTitle(`Room #${params.id}`);
     }, [params.id, setTitle]);
@@ -40,7 +44,7 @@ export function SingleRoom (props) {
     }, [rooms, params.id, dispatch]);
     return (
         <div>
-            <RoomsEdit></RoomsEdit>
+            {edit ? <RoomsEdit setEdit={setEdit}/>: null}
             <SingleItemFirstDiv>
                 <LeftSideDiv>
                     <AvatarDiv>
@@ -56,7 +60,7 @@ export function SingleRoom (props) {
                                     <ItemDetailsButton>
                                         <DeleteSvg />
                                     </ItemDetailsButton>
-                                    <ItemDetailsButtonLabelled>
+                                    <ItemDetailsButtonLabelled onClick={openModal}>
                                         <EditSvg />
                                         <ItemDetailsButtonLabel>
                                             Edit Fields

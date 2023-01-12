@@ -2,20 +2,57 @@ import { useState } from "react";
 import { ModalBackground, ModalButton, ModalDiv, ModalMainTitle, ModalRow, ModalRowItemGrow, ModalSelect, ModalTextarea, ModalTextField, ModalTitle } from "./RoomsStyles";
 import { roomOffer, roomTypes } from "./SingleRoom";
 
+
+
 export function RoomsEdit(props) {
     const [object, setObject] = useState({
-        id: null,
-        type: null,
-        offer: null,
-        price: null,
-        discount: null,
-        description: null,
-        amenities: null,
-        cancellation: null,
-        photos: null
+        id: 0,
+        type: 0,
+        offer: 0,
+        price: 0,
+        discount: 0,
+        description: "",
+        amenities: "",
+        cancellation: "",
+        photos: ""
     });
+
+    const changeId = (ev) => {
+        setObject({...object, id: ev.target.value});
+    }
+    const changeType = (ev) => {
+        setObject({...object, type: ev.target.value});
+    }
+    const changeOffer = (ev) => {
+        setObject({...object, offer: ev.target.value});
+    }
+    const changePrice = (ev) => {
+        setObject({...object, price: ev.target.value});
+    }
+    const changeDiscount = (ev) => {
+        setObject({...object, discount: ev.target.value});
+    }
+    const changeDescription = (ev) => {
+        setObject({...object, description: ev.target.value});
+    }
+    const changeAmenities = (ev) => {
+        setObject({...object, amenities: ev.target.value});
+    }
+    const changeCancellation = (ev) => {
+        setObject({...object, cancellation: ev.target.value});
+    }
+    const changePhotos = (ev) => {
+        setObject({...object, photos: ev.target.value});
+    }
+    const tryLoggingData = async () => {
+        console.log(object);
+    }
+    const closeModal = (ev) => {
+        if (ev.target === ev.currentTarget)
+            props.setEdit(false);
+    }
     return (
-        <ModalBackground>
+        <ModalBackground onClick={closeModal}>
             <ModalDiv>
                 <ModalMainTitle>
                     Room Info
@@ -25,13 +62,13 @@ export function RoomsEdit(props) {
                         <ModalTitle>
                             ID
                         </ModalTitle>
-                        <ModalTextField type="number"/>
+                        <ModalTextField type="number" value={object.id} onChange={changeId}/>
                     </div>
                     <div>
                         <ModalTitle>
                             Type
                         </ModalTitle>
-                        <ModalSelect>
+                        <ModalSelect value={object.type} onChange={changeType}>
                             <option value="0">{roomTypes[0]}</option>
                             <option value="1">{roomTypes[1]}</option>
                             <option value="2">{roomTypes[2]}</option>
@@ -43,7 +80,7 @@ export function RoomsEdit(props) {
                         <ModalTitle>
                             Offer
                         </ModalTitle>
-                        <ModalSelect>
+                        <ModalSelect value={object.offer} onChange={changeOffer}>
                             <option value="0">{roomOffer[0]}</option>
                             <option value="1">{roomOffer[1]}</option>
                         </ModalSelect>
@@ -52,43 +89,43 @@ export function RoomsEdit(props) {
                 <ModalRow>
                     <div>
                         <ModalTitle>
-                            Price
+                            Price ($)
                         </ModalTitle>
-                        <ModalTextField type="number"/>
+                        <ModalTextField type="number" value={object.price} onChange={changePrice}/>
                     </div>
                     <div>
                         <ModalTitle>
                             Discount
                         </ModalTitle>
-                        <ModalTextField type="range"/>
-                        <span>Value</span>
+                        <ModalTextField type="range" value={object.discount} onChange={changeDiscount}/>
+                        <span>{object.discount}%</span>
                     </div>
                 </ModalRow>
                 <ModalTitle>
                     Description
                 </ModalTitle>
-                <ModalTextarea/>
+                <ModalTextarea value={object.description} onChange={changeDescription}/>
                 <ModalRow>
                     <ModalRowItemGrow>
                         <ModalTitle>
                             Amenities
                         </ModalTitle>
-                        <ModalTextarea/>
+                        <ModalTextarea value={object.amenities} onChange={changeAmenities}/>
                     </ModalRowItemGrow>
                     <ModalRowItemGrow>
                         <ModalTitle>
                             Cancellation
                         </ModalTitle>
-                        <ModalTextarea/>
+                        <ModalTextarea value={object.cancellation} onChange={changeCancellation}/>
                     </ModalRowItemGrow>
                 </ModalRow>
                 <ModalTitle>
                     Photos (input space-separated 3 URL's)
                 </ModalTitle>
-                <ModalTextarea/>
+                <ModalTextarea value={object.photos} onChange={changePhotos}/>
                 <ModalRow>
-                    <ModalButton>Input Data</ModalButton>
-                    <ModalButton>Cancel</ModalButton>
+                    <ModalButton onClick={tryLoggingData}>Input Data</ModalButton>
+                    <ModalButton onClick={closeModal}>Cancel</ModalButton>
                 </ModalRow>
             </ModalDiv>
         </ModalBackground>

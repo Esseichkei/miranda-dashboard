@@ -381,7 +381,9 @@ export const ModalRow = styled.div`
         margin-right: 0;
     }
     div span {
+        display: inline-block;
         margin-left: 10px;
+        width: 40px;
     }
 `;
 export const ModalTextarea = styled.textarea`
