@@ -113,6 +113,7 @@ export const RoomsSlice = createSlice({
 
         builder.addCase(deleteRoom.fulfilled, (state, action) => {
             state.fulfilled = true;
+            state.singleItem = null;
         });
         builder.addCase(deleteRoom.pending, (state, action) => {
             state.fulfilled = false;
