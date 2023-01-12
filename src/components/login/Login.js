@@ -32,11 +32,6 @@ export function Login(props) {
             })
         });
         const data = await response.json();
-        console.log(JSON.stringify({
-            email: email,
-            password: password
-        }));
-        console.log(data);
         if (data.token !== undefined) {
             localStorage.setItem('APIToken', data.token)
             auth.authDispatch({type: 'login'});

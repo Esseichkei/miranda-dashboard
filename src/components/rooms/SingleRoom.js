@@ -11,15 +11,16 @@ import { ReactComponent as DeleteSvg } from "../../img/delete-icon.svg";
 import { ReactComponent as EditSvg } from "../../img/edit-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoomById, selectRooms } from "./RoomsSlice";
+import { RoomsEdit } from "./RoomsEdit";
 
-const roomTypes = [
+export const roomTypes = [
     'Single Bed Room',
     'Double Bed Room',
     'Honey Moon Suite',
     'Family Room',
     'Presidential Suite'
 ]
-const offer = [
+export const roomOffer = [
     'Unavailable',
     'Available'
 ]
@@ -39,6 +40,7 @@ export function SingleRoom (props) {
     }, [rooms, params.id, dispatch]);
     return (
         <div>
+            <RoomsEdit></RoomsEdit>
             <SingleItemFirstDiv>
                 <LeftSideDiv>
                     <AvatarDiv>
@@ -75,7 +77,7 @@ export function SingleRoom (props) {
                                 State
                             </DateItemTitle>
                             <DateItemText>
-                                {rooms.singleItem ? offer[rooms.singleItem.offer] : 'Not loaded'}
+                                {rooms.singleItem ? roomOffer[rooms.singleItem.offer] : 'Not loaded'}
                             </DateItemText>
                         </DateItem>
                         <DateItem>

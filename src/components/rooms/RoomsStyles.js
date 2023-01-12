@@ -317,3 +317,96 @@ export const InfoMainText = styled.div`
     margin: 30px 0;
 `;
 export const ClusterDiv = styled.div``;
+
+export const ModalBackground = styled.div`
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 20;
+    background-color: #FFFFFF88;
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+`;
+export const ModalDiv = styled.div`
+    padding: 40px;
+    background-color: #CCCCCC;
+    border-radius: 12px;
+    max-height: 100%;
+    margin: 40px;
+    max-width: 80%;
+    overflow: hidden;
+`;
+export const ModalMainTitle = styled.div`
+    font-size: 30px;
+    border-radius: 3px;
+    border-bottom: 3px solid #999999;
+    margin-bottom: 30px;
+`;
+export const ModalTitle = styled.div`
+    font-size: 20px;
+    color: #121212;
+    margin: 10px 0;
+`;
+export const ModalTextField = styled.input.attrs(props => ({
+    type: props.type || 'text'
+}))`
+    border: none;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 5px;
+    width: 200px;
+`;
+export const ModalSelect = styled.select`
+    border: none;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 5px;
+    width: 200px;
+`;
+export const ModalRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+        margin-right: 30px;
+    }
+    div:last-child {
+        margin-right: 0;
+    }
+    div span {
+        margin-left: 10px;
+    }
+`;
+export const ModalTextarea = styled.textarea`
+    resize: none;
+    border: none;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 5px;
+    width: 100%;
+    min-height: 56px;
+`;
+export const ModalRowItemGrow = styled.div`
+    flex-grow: 1;
+`;
+export const ModalButton = styled.div`
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    transition: background-color 0.5s, color 0.5s;
+    background-color: #F3F3F3;
+    :hover {
+        background-color: #222222;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+`;
