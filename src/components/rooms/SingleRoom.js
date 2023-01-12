@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { Navigate, useOutletContext, useParams } from "react-router-dom";
 import { AvatarDiv, AvatarDivLeft,
     ItemDetails, ItemDetailsButton, ItemDetailsButtonCluster,
     ItemDetailsButtonLabel, ItemDetailsButtonLabelled,
@@ -10,7 +10,7 @@ import { AvatarDiv, AvatarDivLeft,
 import { ReactComponent as DeleteSvg } from "../../img/delete-icon.svg";
 import { ReactComponent as EditSvg } from "../../img/edit-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRoomById, selectRooms } from "./RoomsSlice";
+import { deleteRoom, fetchRoomById, selectRooms } from "./RoomsSlice";
 import { RoomsEdit } from "./RoomsEdit";
 
 export const roomTypes = [
@@ -31,8 +31,12 @@ export function SingleRoom (props) {
     const setTitle = useOutletContext();
     const rooms = useSelector(selectRooms);
     const [edit, setEdit] = useState(false)
+    const [elementDeleted, setElementDeleted] = useState(false);
     const openModal = () => {
         setEdit(true);
+    }
+    const deleteItem = () => {
+        dispatch(deleteRoom(rooms.singleItem.id));
     }
     useEffect(() => {
         setTitle(`Room #${params.id}`);
@@ -42,6 +46,16 @@ export function SingleRoom (props) {
             dispatch(fetchRoomById(params.id));
         }
     }, [rooms, params.id, dispatch]);
+    useEffect(() => {
+        if (rooms.fulfilled) {
+            setEdit(false);
+            if (rooms.singleItem === null) {
+                setElementDeleted(true);
+            }
+        }
+    }, [rooms.fulfilled, rooms.singleItem])
+    if (elementDeleted)
+        return <Navigate to="/rooms" />;
     return (
         <div>
             {edit ? <RoomsEdit setEdit={setEdit}
@@ -59,7 +73,7 @@ export function SingleRoom (props) {
                                     ID: {rooms.singleItem ? rooms.singleItem.id : '12345678'}
                                 </ItemSubtitle>
                                 <ItemDetailsButtonCluster>
-                                    <ItemDetailsButton>
+                                    <ItemDetailsButton onClick={deleteItem}>
                                         <DeleteSvg />
                                     </ItemDetailsButton>
                                     <ItemDetailsButtonLabelled onClick={openModal}>
