@@ -6,6 +6,7 @@ import { selectRooms, fetchRooms } from "./RoomsSlice";
 import { Navigate, useParams, useOutletContext } from "react-router-dom";
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { RoomsEdit } from "./RoomsEdit";
 
 const PAGES_SHOWN = 5;
 const ITEMS_PER_PAGE = 10;
@@ -27,19 +28,25 @@ export function Rooms(props) {
     const totalPages = Math.max(Math.ceil(rooms.items.length / ITEMS_PER_PAGE), 1);
     const pagesStartingFrom = Math.max(1, activePage - Math.floor(PAGES_SHOWN/2));
     const pagesUpTo = Math.min(totalPages, activePage + Math.floor(PAGES_SHOWN/2));
+    const [modal, setModal] = useState(false);
     // itemList useEffect()
     useEffect(() => {
         if (rooms.initialized !== true) {
             dispatch(fetchRooms());
         }
         if (rooms.fulfilled === true) {
-            setRenderedRooms(rooms.items.slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE).map((item, id) => {
+            setRenderedRooms(rooms.items.slice().sort((a, b) => a.id - b.id).slice((activePage - 1) * ITEMS_PER_PAGE, activePage * ITEMS_PER_PAGE).map((item, id) => {
                 return <RoomsListItem selected={false} loaded={rooms.fulfilled} room={item} key={id}/>;
             }));
         } else {
             setRenderedRooms(<RoomsListItem selected={false} loaded={rooms.fulfilled} room={false}/>);
         }
     }, [rooms, dispatch, activePage, totalPages]);
+    useEffect(() => {
+        if (rooms.fulfilled) {
+            setModal(false);
+        }
+    }, [rooms.fulfilled])
     //pagination logic
     const renderedPages = useMemo(() => {
         let arrayOfPages = [];
@@ -54,6 +61,9 @@ export function Rooms(props) {
         return <Navigate to={BASE_URL} replace={false}/>;
     };
     return (<MainSection>
+                {modal ? <RoomsEdit setEdit={setModal}
+                operationInProgress={!rooms.fulfilled}
+                operation="create"/> : null}
                 <div>
                     <TopRowDiv>
                         <TopRowTabDiv>
@@ -68,7 +78,7 @@ export function Rooms(props) {
                             </TopRowTab>
                         </TopRowTabDiv>
                         <div>
-                            <TopRowButton active={true}>+ New Room</TopRowButton>
+                            <TopRowButton active={true} onClick={() => setModal(true)}>+ New Room</TopRowButton>
                             <TopRowButton>Newest</TopRowButton>
                         </div>
                     </TopRowDiv>

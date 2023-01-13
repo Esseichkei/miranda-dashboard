@@ -60,7 +60,7 @@ export function SingleRoom (props) {
         <div>
             {edit ? <RoomsEdit setEdit={setEdit}
                 operationInProgress={!rooms.fulfilled} room={rooms.singleItem}
-                operation="update"/>: null}
+                operation="update"/> : null}
             <SingleItemFirstDiv>
                 <LeftSideDiv>
                     <AvatarDiv>
