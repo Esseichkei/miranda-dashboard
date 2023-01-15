@@ -35,7 +35,7 @@ export const createRoom = createAsyncThunk("room/create", async (object, thunkAP
         },
         body: JSON.stringify(object)
     });
-    thunkAPI.dispatch(fetchRooms());
+    //thunkAPI.dispatch(fetchRooms()); TEST IF THIS STILL WORKS
     return object;
 });
 export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAPI) => {
@@ -47,8 +47,8 @@ export const deleteRoom = createAsyncThunk("room/deleteById", async (id, thunkAP
         },
         body: JSON.stringify({id: id})
     });
-    thunkAPI.dispatch(fetchRooms());
-    thunkAPI.dispatch(fetchRoomById(id))
+    //thunkAPI.dispatch(fetchRooms());
+    //thunkAPI.dispatch(fetchRoomById(id))
     return id;
 });
 export const updateRoom = createAsyncThunk("room/updateById", async (object, thunkAPI) => {
@@ -60,8 +60,8 @@ export const updateRoom = createAsyncThunk("room/updateById", async (object, thu
         },
         body: JSON.stringify(object)
     });
-    thunkAPI.dispatch(fetchRooms());
-    thunkAPI.dispatch(fetchRoomById(object.id))
+    //thunkAPI.dispatch(fetchRooms());
+    //thunkAPI.dispatch(fetchRoomById(object.id))
     return object;
 });
 
@@ -114,6 +114,7 @@ export const RoomsSlice = createSlice({
         builder.addCase(deleteRoom.fulfilled, (state, action) => {
             state.fulfilled = true;
             state.singleItem = null;
+            state.initialized = null;
         });
         builder.addCase(deleteRoom.pending, (state, action) => {
             state.fulfilled = false;
